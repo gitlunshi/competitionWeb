@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="/static/css/element-ui.css"/>
+    <link rel="stylesheet" href="/static/css/login.css"/>
+    <script src="/static/js/jquery-3.7.1.min.js"></script>
+    <script src="/static/js/vue.js"></script>
+    <script src="/static/js/element-ui.js"></script>
+</head>
+<body>
+
+</body>
+
+<div id="app" style="display: none">
+    <div class="login-title">网安攻击测试</div>
+    <div class="login-form">
+        <el-form ref="form" :model="form" label-width="80px">
+            <el-form-item label="用户名：">
+                <el-input v-model="form.loginName"></el-input>
+            </el-form-item>
+            <el-form-item label="密 码：">
+                <el-input v-model="form.password" show-password></el-input>
+            </el-form-item>
+            <el-form-item label="验证码：">
+                <el-input class="code-input" v-model="form.code"></el-input>
+                <img id="code-image-box" class="code-img" src="/common/captcha">
+            </el-form-item>
+                <el-button class="button-sub" type="primary" @click="onSubmit">登录</el-button>
+        </el-form>
+    </div>
+</div>
+
+<script>
+    var app;
+    $(document).ready(function () {
+        app = new Vue({
+            el: '#app',
+            data: {
+                message: 'Hello Vue!',
+                form: {
+                    loginName: '',
+                    password:"",
+                    code:""
+                }
+            },
+            methods: {
+                onSubmit() {
+                    let form = this.form;
+                    $.ajax({
+                        type: 'POST', // 规定请求的类型（GET 或 POST）
+                        url: '/admin/User/userLogin', // 请求的url地址
+                        dataType: 'json', //预期的服务器响应的数据类型
+                        data: form,//规定要发送到服务器的数据
+                        contentType:"application/x-www-form-urlencoded",
+                        beforeSend: function () { //发送请求前运行的函数（发送之前就会进入这个函数）
+
+                        },
+                        success: function (result) { // 当请求成功时运行的函数
+                            if (result.code!=200){
+                                app.$message.error(result.msg);
+                            }else{
+                                location.href="/index";
+                            }
+                        },
+                        error: function (result) { //失败的函数
+
+                        },
+                        complete: function () { //请求完成时运行的函数（在请求成功或失败之后均调用，即在 success 和 error 函数之后，不管成功还是失败 都会进这个函数）
+                        }
+                    });
+                }
+            }
+        });
+        $("#code-image-box").click(function (){
+            $("#code-image-box").attr("src","/common/captcha?time"+Date.now())
+        })
+        $("#app").css("display","block");
+    });
+</script>
+</html>
