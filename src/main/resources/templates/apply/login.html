@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登陆注册</title>
+    <link rel="stylesheet" href="/static/assets/style.css">
+    <link rel="stylesheet" href="/static/assets/iconfont/iconfont.css">
+    <link rel="stylesheet" href="/static/css/element-ui.css"/>
+    <link rel="stylesheet" href="/static/css/login.css"/>
+    <script src="/static/js/jquery-3.7.1.min.js"></script>
+    <script src="/static/js/vue.js"></script>
+    <script src="/static/js/element-ui.js"></script>
+</head>
+<body>
+    <div class='container' id='container' style="display: none">
+        <div class="form-container sign-up-container">
+            <!-- 注册 -->
+           <form action="#">
+            <h1>用户注册</h1>
+<!--            <div class="social-container">-->
+<!--                <a href="#" class="social"><i class="iconfont icon-qq"></i></a>-->
+<!--                <a href="#" class="social"><i class="iconfont icon-weixin"></i></a>-->
+<!--                <a href="#" class="social"><i class="iconfont icon-weibo-copy"></i></a>-->
+<!--                <a href="#" class="social"><i class="iconfont icon-github"></i></a>-->
+<!--            </div>-->
+<!--            <span>您可以选择以上几种方式注册一个您的账户!</span>-->
+            <input v-model="reUserName" type="text" placeholder="用户名">
+            <input v-model="rePassword" type="password" placeholder="密码">
+            <input v-model="reConPassword" type="password" placeholder="确认密码">
+               <el-select v-model="reSchoolId" filterable placeholder="请选择学校">
+                   <el-option
+                           v-for="item in options"
+                           :key="item.value"
+                           :label="item.label"
+                           :value="item.value">
+                   </el-option>
+               </el-select>
+            <img id="reCode-img" src="/common/captcha" @click="changeCodeImg">
+            <input v-model="reCode" type="text" placeholder="验证码">
+            <button @click="reClick()">注册</button>
+           </form>
+        </div>
+        <div class="form-container sign-in-container">
+            <!-- 登陆 -->
+            <form action="#">
+                <h1>用户登陆</h1>
+<!--            <div class="social-container">-->
+<!--                <a href="#" class="social"><i class="iconfont icon-qq"></i></a>-->
+<!--                <a href="#" class="social"><i class="iconfont icon-weixin"></i></a>-->
+<!--                <a href="#" class="social"><i class="iconfont icon-weibo-copy"></i></a>-->
+<!--                <a href="#" class="social"><i class="iconfont icon-github"></i></a>-->
+<!--            </div>-->
+<!--            <span>您可以选择以上几种方式登陆您的账户!</span>-->
+            <input v-model="logUserName" type="text" placeholder="用户名">
+            <input v-model="logPassword" type="password" placeholder="密码">
+            <a style="visibility: hidden;" href="#">忘记密码？</a>
+            <button @click="loginClick()">登陆</button>
+            </form>
+        </div>
+        <!-- 侧边栏内容 -->
+        <div class="overlay-container">
+            <div class="overlay">
+                <div class="overlay-panel overlay-left">
+                    <h1>已有帐号？</h1>
+                    <p>点击登陆按钮去登陆吧。</p>
+                    <button  class='ghost' id="signIn">登陆</button>
+                </div>
+                <div class="overlay-panel overlay-right">
+                    <h1>没有帐号？</h1>
+                    <p>点击注册去注册一个属于你的账号吧。</p>
+                    <button  class='ghost' id="signUp">注册</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+<script src="/static/js/school-value.js"></script>
+<script>
+    var app;
+
+    $(document).ready(function () {
+        app = new Vue({
+            el: '#container',
+            data: {
+                options:school,
+                reSchoolId:'',
+                reUserName:'',
+                rePassword:'',
+                reConPassword:'',
+                logUserName:'',
+                logPassword:'',
+                reCode:'',
+            },
+            methods: {
+                changeCodeImg(){
+                    $("#reCode-img").attr("src","/common/captcha?time="+new Date());
+                },
+                loginClick(){
+                    var form={};
+                    form.loginName=this.logUserName;
+                    form.password=this.logPassword;
+                    $.ajax({
+                        type: 'POST', // 规定请求的类型（GET 或 POST）
+                        url: '/user/userLogin', // 请求的url地址
+                        dataType: 'json', //预期的服务器响应的数据类型
+                        data: form,//规定要发送到服务器的数据
+                        contentType:"application/x-www-form-urlencoded",
+                        beforeSend: function () { //发送请求前运行的函数（发送之前就会进入这个函数）
+
+                        },
+                        success: function (result) { // 当请求成功时运行的函数
+                            if (result.code!=200){
+                                app.$message.error(result.msg);
+                            }else{
+                                location.href="/apply";
+                            }
+                        },
+                        error: function (result) { //失败的函数
+
+                        },
+                        complete: function () { //请求完成时运行的函数（在请求成功或失败之后均调用，即在 success 和 error 函数之后，不管成功还是失败 都会进这个函数）
+                        }
+                    });
+                },
+                reClick(){
+                    if (this.rePassword!=this.reConPassword){
+                        app.$message.error("两次密码不一致！！");
+                        return;
+                    }
+                    var form={};
+                    form.name=this.reUserName;
+                    form.password=this.rePassword;
+                    form.schoolId=this.reSchoolId;
+                    form.code=this.reCode;
+                    $.ajax({
+                        type: 'POST', // 规定请求的类型（GET 或 POST）
+                        url: '/user/userSigUp', // 请求的url地址
+                        dataType: 'json', //预期的服务器响应的数据类型
+                        data: JSON.stringify(form),//规定要发送到服务器的数据
+                        contentType:"application/json",
+                        beforeSend: function () { //发送请求前运行的函数（发送之前就会进入这个函数）
+
+                        },
+                        success: function (result) { // 当请求成功时运行的函数
+                            if (result.code!=200){
+                                $("#reCode-img").attr("src","/common/captcha?time="+new Date());
+                                app.$message.error(result.msg);
+                            }else{
+                                location.href="/apply";
+                            }
+                        },
+                        error: function (result) { //失败的函数
+
+                        },
+                        complete: function () { //请求完成时运行的函数（在请求成功或失败之后均调用，即在 success 和 error 函数之后，不管成功还是失败 都会进这个函数）
+                        }
+                    });
+                }
+            }
+        });
+        $("#container").css("display","block");
+        $("#signIn").click(function () {
+            $("#container").removeClass("right-panel-active");
+        })
+        $("#signUp").click(function () {
+            $("#container").addClass("right-panel-active");
+        })
+    });
+</script>
+</html>

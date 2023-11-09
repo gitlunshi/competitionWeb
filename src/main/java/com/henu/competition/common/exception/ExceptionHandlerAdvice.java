@@ -110,8 +110,8 @@ public class ExceptionHandlerAdvice {
         return Result.failed("上传文件总大小超过 " + (e.getMaxUploadSize()  / 1024) + "KB 大小限制！");
     }
 
-    @ExceptionHandler(ConstraintViolationException.class)
-    public Result<Boolean> vonstraintViolationException(ConstraintViolationException e){
-        return Result.failed("输入参数错误！！");
-    }
+//    @ExceptionHandler(ConstraintViolationException.class)
+//    public Result<Boolean> vonstraintViolationException(ConstraintViolationException e){
+//        return Result.failed("输入参数错误！！");
+//    }
 }

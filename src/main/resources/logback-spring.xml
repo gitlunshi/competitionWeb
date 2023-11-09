@@ -4,8 +4,8 @@
 <!-- scanPeriod:设置监测配置文档是否有修改的时间间隔，如果没有给出时间单位，默认单位是毫秒，当scan为true时此属性生效，默认的时间间隔为1分钟 -->
 <!-- debug:当此属性设置为true时，将打印出logback内部日志信息，实时查看logback运行状态，默认值为false -->
 <configuration debug="false" scan="true" scanPeriod="1200 seconds">
-    <property name="LOG_HOME" value="/logs/SmartSports-springboot"/>
-    <property name="FILE_NAME" value="SmartSports-springboot"/>
+    <property name="LOG_HOME" value="/logs/Jw-competition"/>
+    <property name="FILE_NAME" value="Jw-competition"/>
     <property name="PATTERN_LAYOUT" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %-5level ${PID:-} --- [%thread] %c:%L : %msg%n"/>
 
     <!-- 输出到控制台 -->
@@ -61,10 +61,10 @@
 
     <!-- 生产环境: 输出到控制台和文件 -->
     <springProfile name="prod">
-        <root level="INFO">
+        <root level="WARN">
             <appender-ref ref="consoleAsync"/>
             <appender-ref ref="fileAsync"/>
         </root>
-        <logger name="com.henu.competition" level="INFO"/>
+        <logger name="com.henu.competition" level="WARN"/>
     </springProfile>
 </configuration>

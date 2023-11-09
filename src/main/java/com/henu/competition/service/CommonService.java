@@ -22,16 +22,16 @@ import java.util.Date;
 @Slf4j
 @Service
 public class CommonService {
-    @Value("${file-path}")
-    private String filePath;
+//    @Value("${file-path}")
+//    private String filePath;
 
 
     public void captcha(HttpServletRequest request, HttpServletResponse response) {
         HappyCaptcha.require(request, response)
                 .style(CaptchaStyle.IMG)            //设置展现样式为图片
                 .length(4)                            //设置字符长度为4
-                .width(220)                            //设置动画宽度为220
-                .height(80)                            //设置动画高度为80
+                .width(342)                            //设置动画宽度为220
+                .height(60)                            //设置动画高度为80
                 .build().finish();                  //生成并输出验证码;
         String captcha = (String)request.getSession().getAttribute("happy-captcha");
         request.getSession().setAttribute("happy-captcha-time",0);
@@ -54,16 +54,16 @@ public class CommonService {
      * @param data     文件
      * @return 正常返回文件资源url, 异常则返回null
      */
-    public Boolean uploadVideo(MultipartFile data) {
-        String originalFilename = data.getOriginalFilename();
-        String[] split = originalFilename.split("\\.");
-
-        try {
-            data.transferTo(Paths.get(filePath + split[0]+"-"+new Date().getTime()+"."+split[1]));
-        }catch (Exception e){
-            log.error(e.getMessage());
-            return false;
-        }
-        return true;
-    }
+//    public Boolean uploadVideo(MultipartFile data) {
+//        String originalFilename = data.getOriginalFilename();
+//        String[] split = originalFilename.split("\\.");
+//
+//        try {
+//            data.transferTo(Paths.get(filePath + split[0]+"-"+new Date().getTime()+"."+split[1]));
+//        }catch (Exception e){
+//            log.error(e.getMessage());
+//            return false;
+//        }
+//        return true;
+//    }
 }

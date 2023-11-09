@@ -44,31 +44,31 @@ public class CommonController extends BaseController {
        return r.setData(b);
     }
 
-    @ApiOperation(value = "上传资源")
-    @PostMapping("/uploadResources")
-    @ApiImplicitParam(name = "fileType", value = "文件类型,1:视频，2：图片，3：文档，4：其他", required = true)
-    public Result<String> uploadVideo(HttpServletRequest request,MultipartFile data) throws IOException {
-        String contentType = data.getContentType();
-        HttpSession session = request.getSession();
-        String loginUser = (String)session.getAttribute("loginUser");
-        String UpLoadTag = (String)session.getAttribute("UpLoadTag");
-        if (!"text/plain".equals(contentType)){
-            return Result.failed("文件格式错误！！");
-        }
-        if (loginUser==null){
-            return Result.failed("请登录！！");
-        }
-        if (UpLoadTag.equals("true")){
-            return Result.failed("已经上传过一次，如需重新上传，请重新登录！！");
-        }
-        if (!loginUser.equals("true")){
-            return Result.failed("系统错误，请稍后重试！！");
-        }
-        Boolean s = commonService.uploadVideo(data);
-        if (s){
-            session.setAttribute("UpLoadTag","true");
-            return Result.ok();
-        }
-        return Result.failed("上传失败");
-    }
+//    @ApiOperation(value = "上传资源")
+//    @PostMapping("/uploadResources")
+//    @ApiImplicitParam(name = "fileType", value = "文件类型,1:视频，2：图片，3：文档，4：其他", required = true)
+//    public Result<String> uploadVideo(HttpServletRequest request,MultipartFile data) throws IOException {
+//        String contentType = data.getContentType();
+//        HttpSession session = request.getSession();
+//        String loginUser = (String)session.getAttribute("loginUser");
+//        String UpLoadTag = (String)session.getAttribute("UpLoadTag");
+//        if (!"text/plain".equals(contentType)){
+//            return Result.failed("文件格式错误！！");
+//        }
+//        if (loginUser==null){
+//            return Result.failed("请登录！！");
+//        }
+//        if (UpLoadTag.equals("true")){
+//            return Result.failed("已经上传过一次，如需重新上传，请重新登录！！");
+//        }
+//        if (!loginUser.equals("true")){
+//            return Result.failed("系统错误，请稍后重试！！");
+//        }
+//        Boolean s = commonService.uploadVideo(data);
+//        if (s){
+//            session.setAttribute("UpLoadTag","true");
+//            return Result.ok();
+//        }
+//        return Result.failed("上传失败");
+//    }
 }
