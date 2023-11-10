@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>资料下载</title>
+  <link rel="stylesheet" href="/static/css/element-ui.css"/>
+  <link rel="stylesheet" href="/static/css/download.css"/>
+<!--  <style>-->
+<!--    .download-button {-->
+<!--      padding: 10px 20px;-->
+<!--      background-color: #4CAF50;-->
+<!--      color: white;-->
+<!--      border: none;-->
+<!--      border-radius: 5px;-->
+<!--      cursor: pointer;-->
+<!--      font-size: 16px;-->
+<!--      margin-left: 45%;-->
+<!--      margin-top: 10%;-->
+<!--    }-->
+
+<!--    .download-button:hover {-->
+<!--      background-color: #45a049;-->
+<!--    }-->
+  </style>
+  <script src="/static/js/jquery-3.7.1.min.js"></script>
+  <script src="/static/js/vue.js"></script>
+  <script src="/static/js/element-ui.js"></script>
+</head>
+
+<body>
+<div id="app">
+  <button class="download-button" @click="downloadFile">下载文件</button>
+</div>
+
+<script>
+  new Vue({
+    el: '#app',
+    methods: {
+      downloadFile() {
+        // 创建一个临时的下载链接
+        const url = 'https://example.com/yourfile.pdf'; // 你要下载的文件的 URL
+        const link = document.createElement('a');
+        link.href = url;
+        link.setAttribute('download', 'filename.pdf'); // 设置下载文件的名称
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link); // 之后删除该链接
+      }
+    }
+  });
+</script>
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>联系我们</title>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link rel="stylesheet" href="/static/css/element-ui.css"/>
+  <link rel="stylesheet" href="/static/css/new_index.css"/>
+  <script src="/static/js/jquery-3.7.1.min.js"></script>
+  <script src="/static/js/vue.js"></script>
+  <script src="/static/js/element-ui.js"></script>
+
+</head>
+
+
+<body>
+<div id="app">
+  <div class="Header">
+    <div class="H_middle">
+      <div class="H_left">
+        <a href="new_index.html" class="Menu_item">网站首页</a>
+        <a href="process.html" class="Menu_item">比赛流程</a>
+        <a href="比赛报名.html" class="Menu_item">比赛报名</a>
+        <a href="contact.html" class="Menu_item">联系我们</a>
+        <a href="download.html" class="Menu_item">资料下载</a>
+      </div>
+      <div class="H_right">登录/注册</div>
+    </div>
+  </div>
+
+  <!--头部-->
+  <div class="Top">
+    <img src="../static/img/header.jpg" >
+    <div class="Top_word">河南大学智慧体育竞赛 </div>
+  </div>
+
+  <div style=" margin-top: 24px;">
+    <p style="font-size: 28px; text-align: center;color: #333;">联系方式</p>
+    <p style="font-size: 16px; margin-left: 20%;color: #333;">联系电话：1111</p>
+    <p style="font-size: 16px; margin-left: 20%;color: #333;">联系邮箱：@henu.com</p>
+    <p style="font-size: 16px; margin-left: 20%;color: #333;">联系地址：河南大学软件学院1001</p><BR><BR><BR>
+
+  </div>
+
+</div>
+
+</body>
+
+<script>
+  var Main = {
+    data() {
+      return {
+        activeIndex: '1',
+      };
+    },
+    methods: {
+      handleSelect(key, keyPath) {
+        console.log(key, keyPath);
+      },
+      handleDownload() {
+        window.location.href = "download.html"; // 请根据实际的文件路径进行调整
+      },
+    }
+  }
+  var Ctor = Vue.extend(Main)
+  new Ctor().$mount('#app')
+</script>
+
+</html>
