@@ -2,8 +2,10 @@ package com.henu.competition.controller;
 
 import com.henu.competition.common.controller.BaseController;
 import com.henu.competition.common.model.Result;
+import com.henu.competition.model.User;
 import com.henu.competition.service.CommonService;
 import io.swagger.annotations.*;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.validation.constraints.NotBlank;
 import java.io.IOException;
 
 /**
@@ -44,31 +47,28 @@ public class CommonController extends BaseController {
        return r.setData(b);
     }
 
-//    @ApiOperation(value = "上传资源")
-//    @PostMapping("/uploadResources")
-//    @ApiImplicitParam(name = "fileType", value = "文件类型,1:视频，2：图片，3：文档，4：其他", required = true)
-//    public Result<String> uploadVideo(HttpServletRequest request,MultipartFile data) throws IOException {
-//        String contentType = data.getContentType();
-//        HttpSession session = request.getSession();
-//        String loginUser = (String)session.getAttribute("loginUser");
-//        String UpLoadTag = (String)session.getAttribute("UpLoadTag");
-//        if (!"text/plain".equals(contentType)){
-//            return Result.failed("文件格式错误！！");
-//        }
-//        if (loginUser==null){
-//            return Result.failed("请登录！！");
-//        }
-//        if (UpLoadTag.equals("true")){
-//            return Result.failed("已经上传过一次，如需重新上传，请重新登录！！");
-//        }
-//        if (!loginUser.equals("true")){
-//            return Result.failed("系统错误，请稍后重试！！");
-//        }
-//        Boolean s = commonService.uploadVideo(data);
-//        if (s){
-//            session.setAttribute("UpLoadTag","true");
-//            return Result.ok();
-//        }
-//        return Result.failed("上传失败");
-//    }
+    @ApiOperation(value = "上传资源")
+    @PostMapping("/uploadResources")
+    @ApiImplicitParam(name = "fileType", value = "文件类型,1:视频，2：图片，3：文档，4：其他", required = true)
+    public Result<String> uploadVideo(HttpServletRequest request,MultipartFile data,String fileType) throws IOException {
+        if (StringUtils.isBlank(fileType)||!("1".equals(fileType)||"2".equals(fileType)||"3".equals(fileType)||"4".equals(fileType))){
+            return Result.failed("文件类型错误");
+        }
+        HttpSession session = request.getSession();
+        User loginUser = (User)session.getAttribute("user");
+        if (loginUser==null){
+            return Result.failed("上传失败");
+        }
+        String s = commonService.uploadVideo(data, fileType);
+        if (s!=null){
+            return Result.ok(s);
+        }
+        return Result.failed("上传失败");
+    }
+    @ApiOperation(value = "获取资源文件",notes = "直接返回资源文件，如果是视频文件则支持流媒体断点续传，请求头需要包含Rang字段")
+    @GetMapping("/resourceFile/{file}")
+    @ApiImplicitParam(name = "file", value = "文件名,带后缀", required = true)
+    public void resourceFile(@PathVariable @NotBlank String file, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        commonService.resourceFile(file,request,response);
+    }
 }
