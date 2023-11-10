@@ -3,6 +3,7 @@ package com.henu.competition.controller;
 import com.henu.competition.common.controller.BaseController;
 import com.henu.competition.model.User;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,12 +19,13 @@ import javax.servlet.http.HttpSession;
 public class SystemController extends BaseController {
 
     @GetMapping("/apply")
-    public String index(HttpServletRequest httpServletRequest) {
+    public String index(HttpServletRequest httpServletRequest, Model model) {
         HttpSession session = httpServletRequest.getSession();
         User loginUser = (User)session.getAttribute("user");
         if (loginUser==null){
             return "/apply/login";
         }
+        model.addAttribute("nickname",loginUser.getName());
         return "/apply/index";
     }
     @GetMapping("/apply/login")

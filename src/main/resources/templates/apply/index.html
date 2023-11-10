@@ -2,9 +2,128 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>智慧体育竞赛</title>
+    <link rel="stylesheet" href="/static/css/element-ui.css"/>
+    <link rel="stylesheet" href="/static/css/apply-index.css"/>
+    <script src="/static/js/jquery-3.7.1.min.js"></script>
+    <script src="/static/js/vue.js"></script>
+    <script src="/static/js/apply-component.js"></script>
+    <script src="/static/js/apply-index.js"></script>
+    <script src="/static/js/school-value.js"></script>
 </head>
 <body>
-hahahahahah
+<div id="app" style="display: none">
+    <div id="image-mask-layer" class="mask-layer">
+
+    </div>
+    <div id="video-mask-layer" class="mask-layer">
+
+    </div>
+    <div id="info-mask-layer" class="mask-layer" v-model="infoComponentValue">
+        <div class="info-box">
+            <component :is="infoComponentValue.content" :objId="infoComponentValue.name"></component>
+        </div>
+    </div>
+    <div class="nav-box">
+        <div class="index-title">智慧体育竞赛</div>
+        <el-menu
+                default-active="1"
+                class="el-menu-vertical-demo"
+                background-color="#2B373D"
+                unique-opened="true"
+                text-color="#aaa"
+                active-text-color="#fff">
+            <el-menu-item index="1" @click="addTab('homePage')">
+                <i class="el-icon-s-home">
+                </i>
+                <span slot="title"> {{tag2buttonName.homePage}}</span>
+            </el-menu-item>
+            <el-menu-item index="2"  @click="addTab('teamInfo')">
+                <i class="el-icon-s-flag"></i>
+                <span slot="title">{{tag2buttonName.teamInfo}}</span>
+            </el-menu-item>
+
+            <el-menu-item index="3"  @click="addTab('userInfo')">
+                <i class="el-icon-user-solid"></i>
+                <span slot="title">{{tag2buttonName.userInfo}}</span>
+            </el-menu-item>
+
+            <el-menu-item index="4"  @click="addTab('worksInfo')">
+                <i class="el-icon-coordinate"></i>
+                <span slot="title">{{tag2buttonName.worksInfo}}</span>
+            </el-menu-item>
+            <el-menu-item index="5"  @click="addTab('accountManagement')">
+                <i class="el-icon-coordinate"></i>
+                <span slot="title">{{tag2buttonName.accountManagement}}</span>
+            </el-menu-item>
+        </el-menu>
+    </div>
+    <div class="content-box" :span="21">
+        <div class="content-top">
+            <el-menu :default-active="1" class="el-menu-demo" mode="horizontal"  @select="handleSelect">
+                <el-submenu index="1">
+                    <template slot="title">      <span th:text="${nickname}"></span></template>
+                    <el-menu-item index="1-1">退出</el-menu-item>
+                </el-submenu>
+            </el-menu>
+
+        </div>
+        <div class="content-bottom">
+                    <component :is="infoComponentValue.content" :objId="infoComponentValue.name"></component>
+            </el-tabs>
+        </div>
+    </div>
+</div>
 </body>
+<script src="/static/js/element-ui.js"></script>
+<script>
+
+    var app;
+    var player;
+    $(document).ready(function () {
+        app = new Vue({
+            el: '#app',
+            data: {
+                infoComponentValue: {
+                    name: "homePage",
+                    content: tabTyp["homePage"]
+                },
+                tag2buttonName: {
+                    homePage: "用户首页",
+                    teamInfo: "战队信息",
+                    userInfo: "个人信息",
+                    worksInfo: "作品信息",
+                    accountManagement: "账号管理",
+                }
+            },
+            methods: {
+                displayImageC() {
+                    $("#image-mask-layer").css("display", "none");
+                },
+                displayVideoC() {
+                    $("#video-mask-layer").css("display", "none");
+                },
+                addTab(targetName) {
+                    this.infoComponentValue.content=tabTyp[targetName]
+                    this.infoComponentValue.name=targetName;
+                },
+                handleSelect(key, keyPath) {
+                    if (key='1-1'){
+                        $.get("/user/userLoginOut",function(data,status){
+                            if (data.code==200){
+                                location.href="/";
+                            }else {
+                                app.$message.error(data.msg);
+                            }
+                        });
+                    }
+                    console.log(key);
+                    console.log( keyPath);
+                }
+            }
+        });
+        $("#app").css("display", "block");
+    });
+</script>
+
 </html>

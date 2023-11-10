@@ -5,6 +5,7 @@ import com.henu.competition.common.model.Result;
 import com.henu.competition.common.util.StringTools;
 import com.henu.competition.model.SchoolInfo;
 import com.henu.competition.model.User;
+import com.henu.competition.pojo.req.ModifyUserReq;
 import com.henu.competition.pojo.req.UserSigUpReq;
 import com.henu.competition.service.CommonService;
 import com.henu.competition.service.SchoolInfoService;
@@ -13,13 +14,10 @@ import io.swagger.annotations.*;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.collections4.CollectionUtils;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.PostMapping;
-
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 
 import javax.servlet.http.HttpServletRequest;
@@ -79,9 +77,49 @@ public class UserController{
         return Result.ok("登录成功！！！");
     }
 
+    @ApiOperation(value = "获取用户信息", notes = "")
+    @GetMapping("/getUserInfo")
+    public Result<User> getUserInfo(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+        User r=new User();
+        BeanUtils.copyProperties(user,r);
+        SchoolInfo byId = schoolInfoService.getById(r.getSchoolId());
+        if (byId==null){
+            return Result.failed("系统错误！！");
+        }
+        r.setSchoolId(byId.getCode());
+        return Result.ok(r);
+    }
+
+    @ApiOperation(value = "用户信息修改", notes = "")
+    @PostMapping("/modifyUserInfo")
+    public Result userLoginOut(@Valid @RequestBody ModifyUserReq modifyUserReq, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+
+        QueryWrapper<SchoolInfo> schoolInfoQueryWrapper=new QueryWrapper<>();
+        schoolInfoQueryWrapper.lambda().eq(SchoolInfo::getCode,modifyUserReq.getSchoolId());
+        SchoolInfo one = schoolInfoService.getOne(schoolInfoQueryWrapper);
+        if (one==null){
+            return Result.failed("参数错误！！");
+        }
+
+        User r=new User();
+        BeanUtils.copyProperties(user,r);
+        BeanUtils.copyProperties(modifyUserReq,r);
+        r.setSchoolId(one.getId());
+        Boolean b = userService.updateById(user);
+        if (b){
+            session.setAttribute("user",r);
+            return Result.ok();
+        }
+        return Result.failed();
+    }
+
     @ApiOperation(value = "用户注册", notes = "")
     @PostMapping("/userSigUp")
-
     public Result userSigUp(@Valid @RequestBody UserSigUpReq userSigUpReq, HttpServletRequest request) {
         HttpSession session = request.getSession();
         Boolean verification = commonService.verification( request,userSigUpReq.getCode());

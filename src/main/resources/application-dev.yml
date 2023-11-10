@@ -5,3 +5,4 @@ spring:
     password: henu@rjxy#2023%
 swagger:
   enabled: true
+file-path: D:/private/competition/
