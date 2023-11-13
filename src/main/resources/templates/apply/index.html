@@ -13,47 +13,53 @@
 </head>
 <body>
 <div id="app" style="display: none">
-    <div id="image-mask-layer" class="mask-layer">
+    <transition name="el-zoom-in-center">
+    <div v-show="imageShow" id="image-mask-layer" class="mask-layer transition-box">
 
     </div>
-    <div id="video-mask-layer" class="mask-layer">
+    </transition>
+    <transition name="el-zoom-in-bottom">
+    <div v-show="videoShow" id="video-mask-layer" class="mask-layer transition-box">
 
     </div>
-    <div id="info-mask-layer" class="mask-layer" v-model="infoComponentValue">
+    </transition>
+    <transition name="el-zoom-in-top">
+    <div v-show="infoShow" id="info-mask-layer" class="mask-layer transition-box" v-model="infoComponentValue">
         <div class="info-box">
-            <component :is="infoComponentValue.content" :objId="infoComponentValue.name"></component>
+            <component :is="infoComponentValue.content" :id="infoComponentValue.name" :objId="infoComponentValue.name"></component>
         </div>
     </div>
+    </transition>
     <div class="nav-box">
         <div class="index-title">智慧体育竞赛</div>
         <el-menu
-                default-active="1"
+                :default-active="defaultActive"
                 class="el-menu-vertical-demo"
                 background-color="#2B373D"
                 unique-opened="true"
                 text-color="#aaa"
                 active-text-color="#fff">
-            <el-menu-item index="1" @click="addTab('homePage')">
+            <el-menu-item index="homePage" @click="addTab('homePage')">
                 <i class="el-icon-s-home">
                 </i>
                 <span slot="title"> {{tag2buttonName.homePage}}</span>
             </el-menu-item>
-            <el-menu-item index="2"  @click="addTab('teamInfo')">
+            <el-menu-item index="teamInfo"  @click="addTab('teamInfo')">
                 <i class="el-icon-s-flag"></i>
                 <span slot="title">{{tag2buttonName.teamInfo}}</span>
             </el-menu-item>
 
-            <el-menu-item index="3"  @click="addTab('userInfo')">
+            <el-menu-item index="userInfo"  @click="addTab('userInfo')">
                 <i class="el-icon-user-solid"></i>
                 <span slot="title">{{tag2buttonName.userInfo}}</span>
             </el-menu-item>
 
-            <el-menu-item index="4"  @click="addTab('worksInfo')">
+            <el-menu-item index="worksInfo"  @click="addTab('worksInfo')">
                 <i class="el-icon-coordinate"></i>
                 <span slot="title">{{tag2buttonName.worksInfo}}</span>
             </el-menu-item>
-            <el-menu-item index="5"  @click="addTab('accountManagement')">
-                <i class="el-icon-coordinate"></i>
+            <el-menu-item index="accountManagement"  @click="addTab('accountManagement')">
+                <i class="el-icon-setting"></i>
                 <span slot="title">{{tag2buttonName.accountManagement}}</span>
             </el-menu-item>
         </el-menu>
@@ -69,7 +75,7 @@
 
         </div>
         <div class="content-bottom">
-                    <component :is="infoComponentValue.content" :objId="infoComponentValue.name"></component>
+                    <component :is="ComponentValue.content" :objId="ComponentValue.name"></component>
             </el-tabs>
         </div>
     </div>
@@ -79,14 +85,22 @@
 <script>
 
     var app;
-    var player;
+    let currentpage = window.sessionStorage.getItem("currentpage");
+    if (!currentpage){
+        currentpage="homePage";
+    }
+
     $(document).ready(function () {
         app = new Vue({
             el: '#app',
             data: {
+                ComponentValue: {
+                    name: currentpage,
+                    content: tabTyp[currentpage]
+                },
                 infoComponentValue: {
-                    name: "homePage",
-                    content: tabTyp["homePage"]
+                    name: "",
+                    content: ""
                 },
                 tag2buttonName: {
                     homePage: "用户首页",
@@ -94,7 +108,11 @@
                     userInfo: "个人信息",
                     worksInfo: "作品信息",
                     accountManagement: "账号管理",
-                }
+                },
+                infoShow:false,
+                imageShow:false,
+                videoShow:false,
+                defaultActive:currentpage
             },
             methods: {
                 displayImageC() {
@@ -104,12 +122,13 @@
                     $("#video-mask-layer").css("display", "none");
                 },
                 addTab(targetName) {
-                    this.infoComponentValue.content=tabTyp[targetName]
-                    this.infoComponentValue.name=targetName;
+                    window.sessionStorage.setItem("currentpage",targetName);
+                    this.ComponentValue.content=tabTyp[targetName]
+                    this.ComponentValue.name=targetName;
                 },
                 handleSelect(key, keyPath) {
                     if (key='1-1'){
-                        $.get("/user/userLoginOut",function(data,status){
+                        $.get("/user/userLogout",function(data,status){
                             if (data.code==200){
                                 location.href="/";
                             }else {
@@ -117,13 +136,10 @@
                             }
                         });
                     }
-                    console.log(key);
-                    console.log( keyPath);
                 }
             }
         });
         $("#app").css("display", "block");
     });
 </script>
-
 </html>

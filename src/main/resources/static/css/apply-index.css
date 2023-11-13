@@ -88,7 +88,6 @@ html, body {
     height: 100%;
     z-index: 10;
     background-color: rgba(0,0,0,0.2);
-    display: none;
 }
 .image-box{
     max-width: 1000px;
@@ -286,4 +285,79 @@ width: calc(99% - 101px);
 .student-card-image-box .avatar-uploader,.student-card-image-box img{
     height: 100%;
 }
+.team-box {
+    width: 95%;
+    border: 1px dashed rgba(180,180,180,0.7);
+    border-radius:20px ;
+    position: relative;
+    padding: 20px;
+    margin-top: 30px;
+}
 
+.team-box .label {
+    position: absolute;
+    top: -15px;
+    height: 30px;
+    line-height: 30px;
+    padding-left: 10px;
+    padding-right: 10px;
+    text-align: center;
+    background: white;
+    font-size: 20px;
+    color: rgba(170,170,170,0.8);
+}
+.no-team-box{
+    margin: auto;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    color: rgba(50,50,50,0.9);
+}
+.no-team-box button{
+    margin-top: 20px;
+}
+#joinTeam .user-info-input{
+    width: 500px;
+}
+#teamInfo .el-button--primary{
+    margin-right: 10px;
+}
+#homePage .team-box{
+    border-radius: 0px;
+    border: 1px solid #e6e6e6;
+}
+#homePage .label{
+    color: rgb(50,50,50);;
+}
+#homePage .homePage-info-box{
+    background-color: #e8e8e8;
+    width: 240px;
+    height: 80px;
+    float: left;
+    margin-left: 10px;
+    margin-top: 10px;
+    cursor:pointer;
+}
+#homePage .homePage-info-box:hover{
+    background-color: rgba(200,200,200);
+}
+.homePage-info-title-box{
+    font-size: 12px;
+    color:  #999;
+    margin-top: 10px;
+    margin-left: 10px;
+}
+.homePage-info-content-box{
+    margin-top: 10px;
+    font-size: 20px;
+    width: 100%;
+    text-align: center;
+    color: #417dff;
+}
+#homePage .team-box{
+    width: unset;
+}
+#homePage .el-input__inner{
+    cursor: pointer;
+    background-color: white;
+    color: #666666;
+}

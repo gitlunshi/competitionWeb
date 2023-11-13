@@ -1,15 +1,15 @@
 package com.henu.competition.controller;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.henu.competition.common.controller.BaseController;
+import com.henu.competition.common.model.LoginValidator;
 import com.henu.competition.common.model.Result;
 import com.henu.competition.common.util.StringTools;
-import com.henu.competition.model.SchoolInfo;
-import com.henu.competition.model.User;
+import com.henu.competition.model.*;
 import com.henu.competition.pojo.req.ModifyUserReq;
 import com.henu.competition.pojo.req.UserSigUpReq;
-import com.henu.competition.service.CommonService;
-import com.henu.competition.service.SchoolInfoService;
-import com.henu.competition.service.UserService;
+import com.henu.competition.pojo.res.HomePageRes;
+import com.henu.competition.service.*;
 import io.swagger.annotations.*;
 
 import org.apache.commons.codec.digest.DigestUtils;
@@ -41,7 +41,7 @@ import java.util.UUID;
 @Validated
 
 @RequestMapping("/user")
-public class UserController{
+public class UserController extends BaseController {
     @Autowired
     private CommonService commonService;
 
@@ -51,6 +51,14 @@ public class UserController{
     @Autowired
     private SchoolInfoService schoolInfoService;
 
+    @Autowired
+    private SquadronService squadronService;
+
+    @Autowired
+    private SquadronUserMapService squadronUserMapService;
+
+    @Autowired
+    private ProjectInfoService projectInfoService;
 
     @ApiOperation(value = "用户登录", notes = "")
     @PostMapping("/userLogin")
@@ -79,6 +87,7 @@ public class UserController{
 
     @ApiOperation(value = "获取用户信息", notes = "")
     @GetMapping("/getUserInfo")
+    @LoginValidator
     public Result<User> getUserInfo(HttpServletRequest request) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
@@ -92,8 +101,17 @@ public class UserController{
         return Result.ok(r);
     }
 
+    @ApiOperation(value = "退出登录", notes = "")
+    @GetMapping("/userLogout")
+    public Result userLogout(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        session.removeAttribute("user");
+        return Result.ok();
+    }
+
     @ApiOperation(value = "用户信息修改", notes = "")
     @PostMapping("/modifyUserInfo")
+    @LoginValidator
     public Result userLoginOut(@Valid @RequestBody ModifyUserReq modifyUserReq, HttpServletRequest request) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
@@ -166,5 +184,82 @@ public class UserController{
         }
         session.setAttribute("user",user);
         return Result.ok("成功！！！");
+    }
+
+    @ApiOperation(value = "修改密码", notes = "")
+    @PostMapping("/modifyPassword")
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "oldPasswprd", value = "老密码", required = true),
+            @ApiImplicitParam(name = "newPasswprd", value = "新密码", required = true),
+    })
+    @LoginValidator
+    public Result modifyPassword(@Validated @NotBlank(message = "老密码不能为空！！") String oldPasswprd, @Validated @NotBlank(message = "新密码不能为空！！") String newPasswprd, HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+        QueryWrapper<User> queryWrapper=new QueryWrapper();
+        String password2md5=null;
+        try {
+            password2md5 = DigestUtils.md5Hex(oldPasswprd.getBytes("UTF-8"));
+        }catch (Exception e){
+            return Result.failed("系统错误，请联系管理员！！");
+        }
+
+        if (!password2md5.equals(user.getPassword())){
+            return Result.failed("老密码错误！！");
+        }
+
+        try {
+            password2md5 = DigestUtils.md5Hex(newPasswprd.getBytes("UTF-8"));
+        }catch (Exception e){
+            return Result.failed("系统错误，请联系管理员！！");
+        }
+        User n=new User();
+        n.setId(user.getId());
+        n.setPassword(password2md5);
+
+        boolean b = userService.updateById(n);
+        if (!b){
+            return Result.failed("修改失败！！");
+        }
+        session.removeAttribute("user");
+        return Result.ok("修改成功！！！");
+    }
+
+    @ApiOperation(value = "首页信息", notes = "")
+    @GetMapping("/getHomePage")
+    @LoginValidator
+    public Result<HomePageRes> getHomePage() {
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("user");
+
+        User resultUser=new User();
+        BeanUtils.copyProperties(user,resultUser);
+
+        QueryWrapper<SchoolInfo> schoolInfoQueryWrapper=new QueryWrapper<>();
+        schoolInfoQueryWrapper.lambda().eq(SchoolInfo::getId,user.getSchoolId());
+        SchoolInfo one1 = schoolInfoService.getOne(schoolInfoQueryWrapper);
+        resultUser.setSchoolId(one1.getName());
+
+        HomePageRes h=new HomePageRes();
+        h.setUser(resultUser);
+
+
+        QueryWrapper<SquadronUserMap> queryWrapper=new QueryWrapper<>();
+        queryWrapper.lambda().eq(SquadronUserMap::getUserId,user.getId());
+        SquadronUserMap one = squadronUserMapService.getOne(queryWrapper);
+        if(one!=null){
+            Squadron squadronById = squadronService.getSquadronById(one.getSquadronId());
+            ProjectInfo projectInfoById = projectInfoService.getProjectInfoById(squadronById.getProjectId());
+
+            queryWrapper=new QueryWrapper<>();
+            queryWrapper.lambda().eq(SquadronUserMap::getSquadronId,squadronById.getId());
+            List<SquadronUserMap> list = squadronUserMapService.list(queryWrapper);
+
+            h.setName(squadronById.getName());
+            h.setProject(projectInfoById.getName());
+            h.setMembers(list.size());
+        }
+        return Result.ok(h);
     }
 }

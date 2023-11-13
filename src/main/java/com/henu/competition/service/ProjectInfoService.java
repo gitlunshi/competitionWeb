@@ -17,29 +17,29 @@ import org.springframework.transaction.annotation.Transactional;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 
-import com.henu.competition.model.Squadron;
-import com.henu.competition.model.condition.SquadronCondition;
-import com.henu.competition.mapper.SquadronMapper;
+import com.henu.competition.model.ProjectInfo;
+import com.henu.competition.model.condition.ProjectInfoCondition;
+import com.henu.competition.mapper.ProjectInfoMapper;
 
 /**
  * Service接口实现
  *
  * @author Yalu Wang
- * @version 1.0.0 2023-11-08
+ * @version 1.0.0 2023-11-13
  */
 @Slf4j
 @Service
-@Transactional(readOnly = false)
-public class SquadronService extends ServiceImpl<SquadronMapper, Squadron> {
+@Transactional(readOnly = true)
+public class ProjectInfoService extends ServiceImpl<ProjectInfoMapper, ProjectInfo> {
     /**
      * 分页查询列表
      *
      * @param condition 查询条件
      * @return 分页数据
      */
-    public IPage<Squadron> findSquadronPage(SquadronCondition condition) {
-        IPage<Squadron> page = condition.buildPage();
-        return this.baseMapper.findSquadronList(page, condition);
+    public IPage<ProjectInfo> findProjectInfoPage(ProjectInfoCondition condition) {
+        IPage<ProjectInfo> page = condition.buildPage();
+        return this.baseMapper.findProjectInfoList(page, condition);
     }
 
     /**
@@ -48,8 +48,8 @@ public class SquadronService extends ServiceImpl<SquadronMapper, Squadron> {
      * @param condition 查询条件
      * @return 列表数据
      */
-    public List<Squadron> findSquadronList(SquadronCondition condition) {
-        return this.baseMapper.findSquadronList(condition);
+    public List<ProjectInfo> findProjectInfoList(ProjectInfoCondition condition) {
+        return this.baseMapper.findProjectInfoList(condition);
     }
 
     /**
@@ -58,11 +58,11 @@ public class SquadronService extends ServiceImpl<SquadronMapper, Squadron> {
      * @param condition 查询条件
      * @return 
      */
-    public Squadron getSquadron(SquadronCondition condition) {
-        List<Squadron> list = this.baseMapper.getSquadron(condition);
+    public ProjectInfo getProjectInfo(ProjectInfoCondition condition) {
+        List<ProjectInfo> list = this.baseMapper.getProjectInfo(condition);
         if (CollUtil.isNotEmpty(list)) {
             if (list.size() > 1) {
-                log.warn("Expected one result (or null) to be returned by getSquadron(), but found: {}", list.size());
+                log.warn("Expected one result (or null) to be returned by getProjectInfo(), but found: {}", list.size());
             }
             return list.get(0);
         }
@@ -75,7 +75,7 @@ public class SquadronService extends ServiceImpl<SquadronMapper, Squadron> {
      * @param id 
      * @return 
      */
-    public Squadron getSquadronById(String id) {
+    public ProjectInfo getProjectInfoById(String id) {
         return this.getById(id);
     }
 
@@ -85,12 +85,12 @@ public class SquadronService extends ServiceImpl<SquadronMapper, Squadron> {
      * @param idList 列表
      * @return 列表数据
      */
-    public List<Squadron> findSquadronByIds(List<String> idList) {
+    public List<ProjectInfo> findProjectInfoByIds(List<String> idList) {
         if (CollUtil.isEmpty(idList)) {
             return Collections.emptyList();
         }
-        LambdaQueryWrapper<Squadron> queryWrapper = Wrappers.lambdaQuery();
-        queryWrapper.in(Squadron::getId, idList.stream().filter(StrUtil::isNotBlank).distinct().collect(Collectors.toList()));
+        LambdaQueryWrapper<ProjectInfo> queryWrapper = Wrappers.lambdaQuery();
+        queryWrapper.in(ProjectInfo::getId, idList.stream().filter(StrUtil::isNotBlank).distinct().collect(Collectors.toList()));
         return this.list(queryWrapper);
     }
 
@@ -100,31 +100,31 @@ public class SquadronService extends ServiceImpl<SquadronMapper, Squadron> {
      * @param idList 列表
      * @return Map<, >
      */
-    public Map<String, Squadron> mapSquadronByIds(List<String> idList) {
-        List<Squadron> list = findSquadronByIds(idList);
-        return Optional.ofNullable(list).orElse(CollUtil.toList()).stream().collect(Collectors.toMap(Squadron::getId, Squadron -> Squadron));
+    public Map<String, ProjectInfo> mapProjectInfoByIds(List<String> idList) {
+        List<ProjectInfo> list = findProjectInfoByIds(idList);
+        return Optional.ofNullable(list).orElse(CollUtil.toList()).stream().collect(Collectors.toMap(ProjectInfo::getId, ProjectInfo -> ProjectInfo));
     }
 
     /**
      * 新增
      *
-     * @param squadron 
+     * @param projectInfo 
      * @return 是否成功
      */
     @Transactional(rollbackFor = Exception.class)
-    public Boolean addSquadron(Squadron squadron) {
-        return this.save(squadron);
+    public Boolean addProjectInfo(ProjectInfo projectInfo) {
+        return this.save(projectInfo);
     }
 
     /**
      * 修改
      *
-     * @param squadron 
+     * @param projectInfo 
      * @return 是否成功
      */
     @Transactional(rollbackFor = Exception.class)
-    public Boolean updateSquadron(Squadron squadron) {
-        return this.updateById(squadron);
+    public Boolean updateProjectInfo(ProjectInfo projectInfo) {
+        return this.updateById(projectInfo);
     }
 
     /**
@@ -134,7 +134,7 @@ public class SquadronService extends ServiceImpl<SquadronMapper, Squadron> {
      * @return 是否成功
      */
     @Transactional(rollbackFor = Exception.class)
-    public Boolean deleteSquadronById(String id) {
+    public Boolean deleteProjectInfoById(String id) {
         return this.removeById(id);
     }
 
@@ -145,7 +145,7 @@ public class SquadronService extends ServiceImpl<SquadronMapper, Squadron> {
      * @return 是否成功
      */
     @Transactional(rollbackFor = Exception.class)
-    public Boolean deleteSquadronByIds(List<String> idList) {
+    public Boolean deleteProjectInfoByIds(List<String> idList) {
         return this.removeByIds(idList);
     }
 }

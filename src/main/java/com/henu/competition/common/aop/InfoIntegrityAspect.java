@@ -1,9 +1,11 @@
 package com.henu.competition.common.aop;
 
 import cn.hutool.json.JSONUtil;
+import com.henu.competition.common.model.InforIntegrityValidator;
 import com.henu.competition.common.model.LoginValidator;
 import com.henu.competition.common.model.Result;
 import com.henu.competition.model.User;
+import org.apache.commons.lang3.StringUtils;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -24,14 +26,14 @@ import java.nio.charset.StandardCharsets;
 
 @Component
 @Aspect
-@Order(1)
-public class LoginAspect {
+@Order(2)
+public class InfoIntegrityAspect {
 
     /**
      * 切点，方法上有注解或者类上有注解
      *  拦截类或者是方法上标注注解的方法
      */
-    @Pointcut(value = "@annotation(com.henu.competition.common.model.LoginValidator) || @within(com.henu.competition.common.model.LoginValidator)")
+    @Pointcut(value = "@annotation(com.henu.competition.common.model.InforIntegrityValidator) || @within(com.henu.competition.common.model.InforIntegrityValidator)")
     public void pointCut() {}
 
     @Around("pointCut()")
@@ -39,9 +41,9 @@ public class LoginAspect {
         // 获取方法方法上的LoginValidator注解
         MethodSignature methodSignature = (MethodSignature)joinpoint.getSignature();
         Method method = methodSignature.getMethod();
-        LoginValidator loginValidator = method.getAnnotation(LoginValidator.class);
+        InforIntegrityValidator inforIntegrityValidator = method.getAnnotation(InforIntegrityValidator.class);
         // 如果有，并且值为false，则不校验
-        if (loginValidator != null && !loginValidator.validated()) {
+        if (inforIntegrityValidator != null && !inforIntegrityValidator.validated()) {
             return joinpoint.proceed(joinpoint.getArgs());
         }
         // 正常校验 获取request和response
@@ -54,19 +56,29 @@ public class LoginAspect {
         HttpServletResponse response = requestAttributes.getResponse();
         HttpSession session = request.getSession();
         User loginUser = (User) session.getAttribute("user");
-        if (loginUser!=null){
-            return joinpoint.proceed(joinpoint.getArgs());
+        if (
+                StringUtils.isBlank(loginUser.getRealName())||
+                StringUtils.isBlank(loginUser.getSex())||
+                StringUtils.isBlank(loginUser.getNation())||
+                StringUtils.isBlank(loginUser.getPhone())||
+                StringUtils.isBlank(loginUser.getEmail())||
+                StringUtils.isBlank(loginUser.getSNumber())||
+                StringUtils.isBlank(loginUser.getSchoolId())||
+                StringUtils.isBlank(loginUser.getSicImage())
+        ){
+            returnIntegrity(response);
+            return null;
         }
-        returnNoLogin(response);
-        return null;
+        return joinpoint.proceed(joinpoint.getArgs());
+
 
     }
 
     /**
-     * 返回未登录的错误信息
+     * 信息不完整
      * @param response ServletResponse
      */
-    private void returnNoLogin(HttpServletResponse response) throws IOException {
+    private void returnIntegrity(HttpServletResponse response) throws IOException {
         ServletOutputStream outputStream = response.getOutputStream();
         // 设置返回401 和响应编码
         response.setStatus(200);
@@ -74,8 +86,8 @@ public class LoginAspect {
         // 构造返回响应体
         Result<Object> objectResult = Result.newInstance()
                 .setFlag(false)
-                .setCode(1000)
-                .setMsg("未登陆，请先登陆");
+                .setCode(1001)
+                .setMsg("信息不完整，请先补全用户信息！！");
         String resultString = JSONUtil.toJsonStr(objectResult);
         outputStream.write(resultString.getBytes(StandardCharsets.UTF_8));
     }

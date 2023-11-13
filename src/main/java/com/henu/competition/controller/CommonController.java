@@ -1,6 +1,7 @@
 package com.henu.competition.controller;
 
 import com.henu.competition.common.controller.BaseController;
+import com.henu.competition.common.model.LoginValidator;
 import com.henu.competition.common.model.Result;
 import com.henu.competition.model.User;
 import com.henu.competition.service.CommonService;
@@ -50,6 +51,7 @@ public class CommonController extends BaseController {
     @ApiOperation(value = "上传资源")
     @PostMapping("/uploadResources")
     @ApiImplicitParam(name = "fileType", value = "文件类型,1:视频，2：图片，3：文档，4：其他", required = true)
+    @LoginValidator
     public Result<String> uploadVideo(HttpServletRequest request,MultipartFile data,String fileType) throws IOException {
         if (StringUtils.isBlank(fileType)||!("1".equals(fileType)||"2".equals(fileType)||"3".equals(fileType)||"4".equals(fileType))){
             return Result.failed("文件类型错误");
@@ -68,6 +70,7 @@ public class CommonController extends BaseController {
     @ApiOperation(value = "获取资源文件",notes = "直接返回资源文件，如果是视频文件则支持流媒体断点续传，请求头需要包含Rang字段")
     @GetMapping("/resourceFile/{file}")
     @ApiImplicitParam(name = "file", value = "文件名,带后缀", required = true)
+    @LoginValidator
     public void resourceFile(@PathVariable @NotBlank String file, HttpServletRequest request, HttpServletResponse response) throws IOException {
         commonService.resourceFile(file,request,response);
     }
