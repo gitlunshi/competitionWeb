@@ -14,6 +14,10 @@
 <body>
 <div id="app">
     <div class="Header">
+        <div class="logo">
+            <img src="../static/img/icon6.jpg" style="width: 48px;height: 48px;vertical-align: middle">
+            <span style="line-height: 30px; margin-left: 1px;">河南大学智慧体育竞赛</span>
+        </div>
         <div class="H_middle">
             <div class="H_left">
                 <a href="new_index.html" class="Menu_item">网站首页</a>
@@ -22,7 +26,10 @@
                 <a href="contact.html" class="Menu_item">联系我们</a>
                 <a href="download.html" class="Menu_item">资料下载</a>
             </div>
-            <div class="H_right">登录/注册</div>
+            <div class="H_right">
+                <img src="../static/img/user_icon1.png" style="width: 35px;height: 35px;vertical-align: middle;margin-top:-8px">
+                <span >登录/注册</span>
+            </div>
         </div>
     </div>
 
@@ -30,23 +37,48 @@
     <!--头部-->
     <div class="Top">
         <img src="../static/img/header.jpg" >
-        <div class="Top_word">河南大学智慧体育竞赛 </div>
+        <div class="Top_word">河南大学智慧体育竞赛</div>
+    </div>
+
+    <!--  比赛介绍  -->
+    <div class="Third">
+        <div class="T_cont">
+            <div class="T_img">
+                <img src="../static/img/introduce.jpg">
+            </div>
+            <div class="T_intro">
+                <div class="S_title">
+                    <div><img src="../static/img/titlecoin.jpg"></div>
+                    <div style="margin-bottom:10px;font-size:25px;">比赛介绍</div>
+                </div>
+                <div>
+                    智慧体育是在体育信息化、数字化、智能化的基础上，以物联网、大数据、人工智能等新一代信息技术手段为依托
+                    ，突出强调以人为本的核心理念，将先进科技融入体育产品研发、生产、运输的各环节，使体育的管理、服务等各
+                    阶段充满“智慧”，体现人文关怀、提高效率的同时，实现体育产业经济效益最大化，推动体育可持续发展，最终
+                    “智慧服务于人”，提升体育参与者运动体验感，保障其运动质量。为引导激励我校学生积极响应创新创造的时
+                    代号召，激发大学生从事科学研究与探索的兴趣和潜能以及对体育的热爱，倡导理论联系实际、求真务实的学
+                    风和团队协作的人文精神，提升我校学生的创新能力、实践能力、协作精神、科学和身体素质，培养更多人工智能
+                    领域和工程项目所需人才，河南大学智慧网络研究院和河南众知
+                    物科技有限公司定于XXXX年XX月XX日至XX日在河南大学 (金明校区)，举办河南大学大学生智慧体育竞赛。
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="Second">
-        <div class="S_title">
-            <div class="line"></div>
-            <div class="Title_word">赛事安排</div>
-        </div>
         <div class="S_content">
             <!--轮播图-->
-            <el-carousel :interval="2500" height="350px" style="width: 50%; margin-left: 1px;" :arrow="arrow">
-                <el-carousel-item v-for="item in 4" :key="item" style="cursor: pointer">
+            <el-carousel :interval="2500" style="width: 600px;margin-top: 90px;margin-left: 55px;" :arrow="arrow">
+                <el-carousel-item v-for="item in 4" :key="item" style="cursor: pointer;height: 300px">
                     <img :src="'../static/img/testpic' + item + '.jpg'" style="width: 100%; height: 100%; ">
                 </el-carousel-item>
             </el-carousel>
             <!--时间线-->
             <div class="timeline">
+                <div class="S_title">
+                    <div><img src="../static/img/titlecoin.jpg"></div>
+                    <div style="margin-bottom:20px;font-size:25px;">赛事安排</div>
+                </div>
                 <div class="time_Data">
                     <div class="Data_item">2023-11-01</div>
                     <div class="Data_item">2023-11-01</div>
@@ -75,14 +107,7 @@
         </div>
 
     </div>
-    <!--  比赛介绍  -->
-    <div class="Third">
-        <div class="S_title">
-            <div class="line"></div>
-            <div class="Title_word">比赛介绍</div>
-        </div>
-        <div class="T_cont">智慧体育是在体育信息化、数字化、智能化的基础上，以物联网、大数据、人工智能等新一代信息技术手段为依托，突出强调以人为本的核心理念，将先进科技融入体育产品研发、生产、运输的各环节，使体育的管理、服务等各阶段充满“智慧”，体现人文关怀、提高效率的同时，实现体育产业经济效益最大化，推动体育可持续发展，最终“智慧服务于人”，提升体育参与者运动体验感，保障其运动质量。为引导激励我校学生积极响应创新创造的时代号召，激发大学生从事科学研究与探索的兴趣和潜能以及对体育的热爱，倡导理论联系实际、求真务实的学风和团队协作的人文精神，提升我校学生的创新能力、实践能力、协作精神、科学和身体素质，培养更多人工智能领域和工程项目所需人才，河南大学智慧网络研究院和河南众知物科技有限公司定于XXXX年XX月XX日至XX日在河南大学 (金明校区)，举办河南大学大学生智慧体育竞赛。</div>
-    </div>
+
     <div class="S_title" style="margin-top:75px;">
         <div class="line"></div>
         <div class="Title_word">比赛项目</div>

@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>联系我们</title>
+  <title>比赛流程 </title>
   <meta charset="UTF-8">
   <title>Title</title>
   <link rel="stylesheet" href="/static/css/element-ui.css"/>
-  <link rel="stylesheet" href="/static/css/new_index.css"/>
+  <link rel="stylesheet" href="../static/css/new_index.css"/>
+  <link rel="stylesheet" href="/static/css/downloadProcess.css"/>
   <script src="/static/js/jquery-3.7.1.min.js"></script>
   <script src="/static/js/vue.js"></script>
   <script src="/static/js/element-ui.js"></script>
@@ -17,6 +18,10 @@
 <body>
 <div id="app">
   <div class="Header">
+    <div class="logo">
+      <img src="../static/img/icon6.jpg" style="width: 48px;height: 48px;vertical-align: middle">
+      <span style="line-height: 30px; margin-left: 1px;">河南大学智慧体育竞赛</span>
+    </div>
     <div class="H_middle">
       <div class="H_left">
         <a href="new_index.html" class="Menu_item">网站首页</a>
@@ -25,7 +30,10 @@
         <a href="contact.html" class="Menu_item">联系我们</a>
         <a href="download.html" class="Menu_item">资料下载</a>
       </div>
-      <div class="H_right">登录/注册</div>
+      <div class="H_right">
+        <img src="../static/img/user_icon1.png" style="width: 35px;height: 35px;vertical-align: middle;margin-top:-8px">
+        <span >登录/注册</span>
+      </div>
     </div>
   </div>
 
@@ -43,6 +51,24 @@
 
   </div>
 
+  <div class="foot">
+    <div class="f_con">
+      <div class="link">
+        <h2>友情链接</h2>
+        <p><a href="https://www.henu.edu.cn/" style="text-decoration: none; color: inherit;">河南大学</a></p>
+        <p>主办单位：<a href="https://software.henu.edu.cn/" style="text-decoration: none; color: inherit;">河南大学软件学院</a></p>
+        <p>承办单位：河南大学智慧网络研究院&nbsp;<a href="https://www.hnzzw.com/" style="text-decoration: none; color: inherit;">河南众知物科技有限公司</a></p>
+      </div>
+      <div class="aboutus">
+        <h2>联系方式</h2>
+        <p>报名：16666666666</p>
+        <p>邮箱：111111111@qq.com</p>
+        <p>地址：河南省开封市龙亭区东京大道河南大学</p>
+      </div>
+    </div>
+
+  </div>
+
 </div>
 
 </body>
@@ -57,9 +83,6 @@
     methods: {
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
-      },
-      handleDownload() {
-        window.location.href = "download.html"; // 请根据实际的文件路径进行调整
       },
     }
   }
