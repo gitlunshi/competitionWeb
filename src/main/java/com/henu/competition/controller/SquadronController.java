@@ -12,6 +12,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiImplicitParam;
 import io.swagger.annotations.ApiOperation;
 
+import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -41,6 +42,7 @@ import com.henu.competition.common.model.Result;
 import com.henu.competition.common.util.Assert;
 
 import com.henu.competition.model.condition.SquadronCondition;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * squadronController
@@ -67,6 +69,11 @@ public class SquadronController extends BaseController {
     @Autowired
     private SchoolInfoService schoolInfoService;
 
+    @Autowired
+    private WorkInfoService workInfoService;
+
+    @Autowired
+    private CommonService commonService;
     @ApiOperation(value = "创建战队并加入")
     @ApiImplicitParam(name = "squadron", value = "", required = true, dataType = "Squadron", paramType = "body")
     @PostMapping("/creatTeam")
@@ -370,4 +377,36 @@ public class SquadronController extends BaseController {
         return Result.ok();
     }
 
+
+    @ApiOperation(value = "作品提交")
+    @PostMapping(value = "/postWork")
+    @LoginValidator
+    @InforIntegrityValidator
+    public Result<SquadronRes> postWork(MultipartFile data) throws IOException {
+
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+        QueryWrapper<SquadronUserMap> queryWrapper=new QueryWrapper<>();
+        queryWrapper.lambda().eq(SquadronUserMap::getUserId,user.getId());
+        queryWrapper.lambda().eq(SquadronUserMap::getLeaderTag,1);
+        SquadronUserMap one = squadronUserMapService.getOne(queryWrapper);
+        if (one==null){
+            return Result.failed("只有队长才可以提交作品！！");
+        }
+
+        String s = commonService.uploadResources(data, "4");
+
+        WorkInfo workInfo=new WorkInfo();
+        workInfo.setId(UUID.randomUUID().toString());
+        workInfo.setFileName(data.getOriginalFilename());
+        workInfo.setFilePath(s);
+        workInfo.setSquadronId(one.getSquadronId());
+        workInfo.setCreatedBy(user.getId());
+        workInfo.setCreationDate(new Date());
+        boolean save = workInfoService.save(workInfo);
+        if (save){
+            return  Result.ok();
+        }
+        return Result.failed("上传失败");
+    }
 }

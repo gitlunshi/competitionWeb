@@ -2,86 +2,225 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
-    <link rel="stylesheet" href="/static/css/element-ui.css"/>
-    <link rel="stylesheet" href="/static/css/index.css"/>
-    <script src="/static/js/jquery-3.7.1.min.js"></script>
-    <script src="/static/js/vue.js"></script>
-    <script src="/static/js/index.js"></script>
-
+    <title>首页</title>
+    <link rel="stylesheet" href="../static/css/element-ui.css"/>
+    <link rel="stylesheet" href="../static/css/new_index.css"/>
+    <script src="../static/js/jquery-3.7.1.min.js"></script>
+    <script src="../static/js/vue.js"></script>
+    <script src="../static/js/element-ui.js"></script>
 </head>
+
+
 <body>
-<img src="/static/img/hh.png">
 <div id="app">
-    <el-upload
-            class="upload-demo"
-            ref="upload"
-            name="data"
-            action="/common/uploadResources"
-            :on-preview="handlePreview"
-            :before-upload="beforeAvatarUpload"
-            :on-remove="handleRemove"
-            :on-success="subSuccess"
-            :on-error="subError"
-            :file-list="fileList"
-            :limit="1"
-            :auto-upload="false">
-        <el-button slot="trigger" size="small" type="primary">选取文件</el-button>
-        <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>
-        <div slot="tip" class="el-upload__tip">只能上传txt文件，且不超过10MB，文件名格式为“学号+姓名”，文件内容写入侵过程，越详细越好！！</div>
-    </el-upload>
+    <div class="Header">
+        <div class="logo">
+            <img src="../static/img/icon6.jpg" style="width: 48px;height: 48px;vertical-align: middle">
+            <span style="line-height: 30px; margin-left: 1px;">河南大学智慧体育竞赛</span>
+        </div>
+        <div class="H_middle">
+            <div class="H_left">
+                <a href="index.html" class="Menu_item">网站首页</a>
+                <a href="process.html" class="Menu_item">比赛流程</a>
+                <a href="/apply" class="Menu_item">比赛报名</a>
+                <a href="contact.html" class="Menu_item">联系我们</a>
+                <a href="download.html" class="Menu_item">资料下载</a>
+            </div>
+            <div class="H_right">
+                <img src="../static/img/user_icon1.png" style="width: 35px;height: 35px;vertical-align: middle;margin-top:-8px">
+                <span >登录/注册</span>
+            </div>
+        </div>
+    </div>
+
+
+    <!--头部-->
+    <div class="Top">
+        <img src="../static/img/header.jpg" >
+        <div class="Top_word">河南大学智慧体育竞赛</div>
+    </div>
+
+    <!--  比赛介绍  -->
+    <div class="Third">
+        <div class="T_cont">
+            <div class="T_img">
+                <img src="../static/img/introduce.jpg">
+            </div>
+            <div class="T_intro">
+                <div class="S_title">
+                    <div><img src="../static/img/titlecoin.jpg"></div>
+                    <div style="margin-bottom:10px;font-size:25px;">比赛介绍</div>
+                </div>
+                <div>
+                    智慧体育是在体育信息化、数字化、智能化的基础上，以物联网、大数据、人工智能等新一代信息技术手段为依托
+                    ，突出强调以人为本的核心理念，将先进科技融入体育产品研发、生产、运输的各环节，使体育的管理、服务等各
+                    阶段充满“智慧”，体现人文关怀、提高效率的同时，实现体育产业经济效益最大化，推动体育可持续发展，最终
+                    “智慧服务于人”，提升体育参与者运动体验感，保障其运动质量。为引导激励我校学生积极响应创新创造的时
+                    代号召，激发大学生从事科学研究与探索的兴趣和潜能以及对体育的热爱，倡导理论联系实际、求真务实的学
+                    风和团队协作的人文精神，提升我校学生的创新能力、实践能力、协作精神、科学和身体素质，培养更多人工智能
+                    领域和工程项目所需人才，河南大学智慧网络研究院和河南众知
+                    物科技有限公司定于XXXX年XX月XX日至XX日在河南大学 (金明校区)，举办河南大学大学生智慧体育竞赛。
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="Second">
+        <div class="S_content">
+            <!--轮播图-->
+            <el-carousel :interval="2500" style="width: 600px;margin-top: 90px;margin-left: 55px;" :arrow="arrow">
+                <el-carousel-item v-for="item in 4" :key="item" style="cursor: pointer;height: 300px">
+                    <img :src="'../static/img/testpic' + item + '.jpg'" style="width: 100%; height: 100%; ">
+                </el-carousel-item>
+            </el-carousel>
+            <!--时间线-->
+            <div class="timeline">
+                <div class="S_title">
+                    <div><img src="../static/img/titlecoin.jpg"></div>
+                    <div style="margin-bottom:20px;font-size:25px;">赛事安排</div>
+                </div>
+                <div class="time_Data">
+                    <div class="Data_item">2023-11-01</div>
+                    <div class="Data_item">2023-11-01</div>
+                    <div class="Data_item">2023-11-01</div>
+                    <div class="Data_item">2023-11-01</div>
+                </div>
+                <div class="time_con">
+                    <div class="con_item">
+                        <span>大赛报名</span>
+                        <p>智慧体育是在体育信息化、数字化、智能化的基础上，以物联网、大数据、人工智能等新一代信息技术手段为依托，突出强调以人为本的核心理念，将先进科技融入体育产品研发、生产、运输的各环节，使体育的管理、服务等各阶段充满“智慧”，体现人文关怀</p>
+                    </div>
+                    <div class="con_item">
+                        <span>大赛报名</span>
+                        <p>智慧体育是在体育信息化、数字化、智能化的基础上，以物联网、大数据、人工智能等新一代信息技术手段为依托，突出强调以人为本的核心理念，将先进科技融入体育产品研发、生产、运输的各环节，使体育的管理、服务等各阶段充满“智慧”，体现人文关怀</p>
+                    </div>
+                    <div class="con_item">
+                        <span>大赛报名</span>
+                        <p>智慧体育是在体育信息化、数字化、智能化的基础上，以物联网、大数据、人工智能等新一代信息技术手段为依托，突出强调以人为本的核心理念，将先进科技融入体育产品研发、生产、运输的各环节，使体育的管理、服务等各阶段充满“智慧”，体现人文关怀</p>
+                    </div>
+                    <div class="con_item">
+                        <span>大赛报名</span>
+                        <p>智慧体育是在体育信息化、数字化、智能化的基础上，以物联网、大数据、人工智能等新一代信息技术手段为依托，突出强调以人为本的核心理念，将先进科技融入体育产品研发、生产、运输的各环节，使体育的管理、服务等各阶段充满“智慧”，体现人文关怀</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="S_title" style="margin-top:75px;">
+        <div class="line"></div>
+        <div class="Title_word">比赛项目</div>
+    </div>
+    <div class="Big">
+        <div class="Four">
+            <!-- 项目分类图片 -->
+            <div class="pr_pic">
+                <div class="game_item">
+                    <a href="process.html" style="color: black;">
+                        <img src="../static/img/slider2.jpg">
+                        <div>小程序开发</div>
+                    </a>
+                </div>
+                <div class="game_item" >
+                    <a href="process.html" style="color: black;">
+                        <img src="../static/img/slider2.jpg">
+                        <div>WEB开发</div>
+                    </a>
+                </div>
+                <div class="game_item">
+                    <a href="process.html" style="color: black;">
+                        <img src="../static/img/slider2.jpg">
+                        <div>安卓/IOS开发</div>
+                    </a>
+                </div>
+            </div>
+            <div class="pr_pic">
+                <div class="game_item">
+                    <a href="process.html" style="color: black;">
+                        <img src="../static/img/slider2.jpg">
+                        <div>人脸识别替换</div>
+                    </a>
+                </div>
+                <div class="game_item">
+                    <a href="process.html" style="color: black;">
+                        <img src="../static/img/slider2.jpg">
+                        <div>实时姿态估计</div>
+                    </a>
+                </div>
+                <div class="game_item">
+                    <a href="process.html" style="color: black;">
+                        <img src="../static/img/slider2.jpg">
+                        <div>三维人体重建</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div><BR><BR>
+    <div class="button-center">
+        <a href="your_registration_link" class="registration_button">比赛报名</a>
+    </div><BR><BR><BR><BR>
+
+    <div class="foot">
+        <div class="f_con">
+            <div class="link">
+                <h2>友情链接</h2>
+                <p><a href="https://www.henu.edu.cn/" style="text-decoration: none; color: inherit;">河南大学</a></p>
+                <p>主办单位：<a href="https://software.henu.edu.cn/" style="text-decoration: none; color: inherit;">河南大学软件学院</a></p>
+                <p>承办单位：河南大学智慧网络研究院&nbsp;<a href="https://www.hnzzw.com/" style="text-decoration: none; color: inherit;">河南众知物科技有限公司</a></p>
+            </div>
+            <div class="aboutus">
+                <h2>联系方式</h2>
+                <p>报名：16666666666</p>
+                <p>邮箱：111111111@qq.com</p>
+                <p>地址：河南省开封市龙亭区东京大道河南大学</p>
+            </div>
+        </div>
+
+    </div>
+
+
 </div>
+
 </body>
-<script src="/static/js/element-ui.js"></script>
+
+<!--轮播图-->
+<style>
+    .el-carousel__item h3 {
+        color: #475669;
+        font-size: 14px;
+        opacity: 0.75;
+        line-height: 150px;
+        margin: 0;
+    }
+
+    .el-carousel__item:nth-child(2n) {
+        background-color: #99a9bf;
+    }
+
+    .el-carousel__item:nth-child(2n+1) {
+        background-color: #d3dce6;
+    }
+
+
+</style>
+
 <script>
-
-    var app;
-    $(document).ready(function () {
-        app = new Vue({
-            el: '#app',
-            data: {
-                fileList: []
-            },
-            methods: {
-                submitUpload() {
-                    this.$refs.upload.submit();
-                },
-                handleRemove(file, fileList) {
-                    console.log(file, fileList);
-                },
-                handlePreview(file) {
-                    console.log(file);
-                },
-                beforeAvatarUpload(file) {
-                    const isJPG = file.type === 'text/plain';
-                    const isLt2M = file.size / 1024/1024 < 10;
-                    console.log(file.type)
-                    if (!isJPG) {
-                        this.fileList=[];
-                        this.$message.error('上传的文件必须是txt格式!');
-                        return false;
-                    }
-                    if (!isLt2M) {
-                        this.fileList=[];
-                        this.$message.error('上传文件大小不能超过10MB!');
-                        return false;
-                    }
-                    return isJPG && isLt2M;
-                },
-                subSuccess(response, file, fileList){
-                    if (response.code!=200){
-                        app.$message.error(response.msg);
-                    }else{
-                        app.$message.success("上传成功");
-                    }
-                    this.fileList=[];
-                },
-                subError(err, file, fileList){
-
-                },
+    var Main = {
+        data() {
+            return {
+                activeIndex: '1',
+                arrow: 'always',
+            };
+        },
+        methods: {
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
             }
-        });
-    });
+        }
+    }
+    var Ctor = Vue.extend(Main)
+    new Ctor().$mount('#app')
 </script>
 
 </html>

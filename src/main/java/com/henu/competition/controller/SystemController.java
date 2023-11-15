@@ -5,6 +5,7 @@ import com.henu.competition.model.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -23,19 +24,24 @@ public class SystemController extends BaseController {
         HttpSession session = httpServletRequest.getSession();
         User loginUser = (User)session.getAttribute("user");
         if (loginUser==null){
-            return "/apply/login";
+            return "apply/login";
         }
         model.addAttribute("nickname",loginUser.getName());
-        return "/apply/index";
+        return "apply/index";
     }
     @GetMapping("/apply/login")
     public String login() {
-        return "/apply/login";
+        return "apply/login";
     }
 
     @GetMapping("/")
-    public String firstPage(HttpServletRequest request) {
+    public String firstPage() {
         return "index";
     }
 
+    @GetMapping("/{staticFile}")
+    public String staticFile(@PathVariable String staticFile) {
+        String[] split = staticFile.split("\\.");
+        return split[0];
+    }
 }

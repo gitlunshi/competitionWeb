@@ -63,7 +63,7 @@ public class CommonService {
      * @param fileType 文件类型,1:视频，2：图片，3：文档，4：其他
      * @return 正常返回文件资源url, 异常则返回null
      */
-    public String uploadVideo(MultipartFile data, String fileType) throws IOException {
+    public String uploadResources(MultipartFile data, String fileType) throws IOException {
         String originalFilename = data.getOriginalFilename();
         String[] split = originalFilename.split("\\.");
         String filename = UUID.randomUUID().toString();

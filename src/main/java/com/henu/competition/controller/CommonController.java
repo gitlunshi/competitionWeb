@@ -52,7 +52,7 @@ public class CommonController extends BaseController {
     @PostMapping("/uploadResources")
     @ApiImplicitParam(name = "fileType", value = "文件类型,1:视频，2：图片，3：文档，4：其他", required = true)
     @LoginValidator
-    public Result<String> uploadVideo(HttpServletRequest request,MultipartFile data,String fileType) throws IOException {
+    public Result<String> uploadResources(HttpServletRequest request,MultipartFile data,String fileType) throws IOException {
         if (StringUtils.isBlank(fileType)||!("1".equals(fileType)||"2".equals(fileType)||"3".equals(fileType)||"4".equals(fileType))){
             return Result.failed("文件类型错误");
         }
@@ -61,7 +61,7 @@ public class CommonController extends BaseController {
         if (loginUser==null){
             return Result.failed("上传失败");
         }
-        String s = commonService.uploadVideo(data, fileType);
+        String s = commonService.uploadResources(data, fileType);
         if (s!=null){
             return Result.ok(s);
         }
