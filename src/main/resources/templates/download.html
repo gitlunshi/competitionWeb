@@ -3,38 +3,35 @@
 <head>
   <meta charset="UTF-8">
   <title>资料下载</title>
-  <link rel="stylesheet" href="/static/css/element-ui.css"/>
-  <link rel="stylesheet" href="/static/css/download.css"/>
-<!--  <style>-->
-<!--    .download-button {-->
-<!--      padding: 10px 20px;-->
-<!--      background-color: #4CAF50;-->
-<!--      color: white;-->
-<!--      border: none;-->
-<!--      border-radius: 5px;-->
-<!--      cursor: pointer;-->
-<!--      font-size: 16px;-->
-<!--      margin-left: 45%;-->
-<!--      margin-top: 10%;-->
-<!--    }-->
-
-<!--    .download-button:hover {-->
-<!--      background-color: #45a049;-->
-<!--    }-->
-  </style>
-  <script src="/static/js/jquery-3.7.1.min.js"></script>
-  <script src="/static/js/vue.js"></script>
-  <script src="/static/js/element-ui.js"></script>
+  <link rel="stylesheet" href="../static/css/element-ui.css"/>
+  <link rel="stylesheet" href="../static/css/download.css"/>
+  <script src="../static/js/jquery-3.7.1.min.js"></script>
+  <script src="../static/js/vue.js"></script>
+  <script src="../static/js/element-ui.js"></script>
 </head>
 
 <body>
 <div id="app">
   <button class="download-button" @click="downloadFile">下载文件</button>
+
+  <el-steps :space="100" :active="active" finish-status="success">
+    <el-step title="步骤 1"></el-step>
+    <el-step title="步骤 2"></el-step>
+    <el-step title="步骤 3"></el-step>
+  </el-steps>
+
+  <el-button style="margin-top: 12px;" @click="next">下一步</el-button>
+
 </div>
 
 <script>
   new Vue({
     el: '#app',
+    data() {
+      return {
+        active: 0,
+      };
+    },
     methods: {
       downloadFile() {
         // 创建一个临时的下载链接
@@ -45,7 +42,11 @@
         document.body.appendChild(link);
         link.click();
         document.body.removeChild(link); // 之后删除该链接
+      },
+      next() {
+        if (this.active++ > 3) this.active = 0;
       }
+
     }
   });
 </script>

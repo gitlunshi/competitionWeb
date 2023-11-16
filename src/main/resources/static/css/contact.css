@@ -1,0 +1,37 @@
+.contact_icon{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+.contact_icon img{
+    margin-top: 1%;
+    width: 100px;
+    height: 100px;
+}
+.contact_font{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+.contact_font span{
+    font-family: 微软雅黑;
+    font-size: 20px;
+    margin-top: 20px;
+    color: #8c939d;
+    font-weight: bolder;
+    margin-left: 20px;
+}
+.contact_info{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+.contact_info span{
+    margin-top: 20px;
+}
+.contact_info span:first-child{
+    margin-left: 44px;
+}
