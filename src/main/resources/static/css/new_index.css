@@ -306,7 +306,7 @@ a{
     height: 100%;
     bottom: 0;
     left: 0;
-    background-color: #00cc00; /* Set the color of the sliding background */
+    background-color: #4CD875; /* Set the color of the sliding background */
     color: #FAFAFA;
     z-index:-2;
     transition: width 0.6s ease; /* Add a smooth transition effect for the sliding line */
@@ -329,9 +329,10 @@ a{
     color: black;
     padding: 1px;
 }
-.H_right:hover{
+.H_right a:hover{
     color: #4CAF50;
 }
+
 .Top{
 position: relative;
 }
@@ -625,7 +626,7 @@ display: block;
 .registration_button {
     display: inline-block;
     padding: 15px 40px;
-    background-color:limegreen;
+    background-color:#4CD875;
     color: white;
     text-decoration: none;
     margin-top: 3%;

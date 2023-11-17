@@ -26,13 +26,17 @@
       <div class="H_left">
         <a href="index.html" class="Menu_item">网站首页</a>
         <a href="process.html" class="Menu_item">比赛流程</a>
-        <a href="/apply" class="Menu_item">比赛报名</a>
+
+        <a v-if="isLoggedIn" href="apply/index.html" class="Menu_item">比赛报名</a>
+        <a v-else href="apply/login.html" class="Menu_item">比赛报名</a>
+
         <a href="contact.html" class="Menu_item">联系我们</a>
         <a href="download.html" class="Menu_item">资料下载</a>
       </div>
       <div class="H_right">
         <img src="../static/img/user_icon1.png" style="width: 35px;height: 35px;vertical-align: middle;margin-top:-8px">
-        <span >登录/注册</span>
+        <a v-if="isLoggedIn" href="apply/index.html">个人中心</a>
+        <a v-else href="apply/login.html">登录/注册</a>
       </div>
     </div>
   </div>
@@ -102,6 +106,7 @@
     data() {
       return {
         activeIndex: '1',
+        isLoggedIn: false,//判断是否登录参数
       };
     },
     methods: {
