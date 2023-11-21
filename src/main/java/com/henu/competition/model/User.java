@@ -62,6 +62,11 @@ public class User extends BaseBean {
     private String realName;
 
     /** 性别。1：男，2：女 */
+    @ApiModelProperty(value = "学历。1：博士研究生，2：硕士研究生，3：本科，4：专科", position = 14)
+    @JsonProperty(index = 14)
+    private String education;
+
+    /** 性别。1：男，2：女 */
     @ApiModelProperty(value = "性别。1：男，2：女", position = 5)
     @JsonProperty(index = 5)
     private String sex;

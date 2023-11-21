@@ -55,7 +55,7 @@
                 <span slot="title">{{tag2buttonName.userInfo}}</span>
             </el-menu-item>
 
-            <el-menu-item index="worksInfo"  @click="addTab('worksInfo')">
+            <el-menu-item v-if="worksPostTag" index="worksInfo"  @click="addTab('worksInfo')">
                 <i class="el-icon-coordinate"></i>
                 <span slot="title">{{tag2buttonName.worksInfo}}</span>
             </el-menu-item>
@@ -92,6 +92,7 @@
     }
 
     $(document).ready(function () {
+        let b = isPostWorkTime();
         app = new Vue({
             el: '#app',
             data: {
@@ -113,6 +114,7 @@
                 infoShow:false,
                 imageShow:false,
                 videoShow:false,
+                worksPostTag:b,
                 defaultActive:currentpage
             },
             methods: {

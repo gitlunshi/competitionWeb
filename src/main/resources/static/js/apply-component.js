@@ -294,6 +294,15 @@ tabTyp.userInfo = {
         '      <el-option label="女" value="2"></el-option>' +
         '    </el-select>' +
         '    </div>' +
+        '<div class="user-info-input-sex user-info-input">' +
+        '    <div class="sex-title el-input-group__prepend"><span class="input-important-tag">*</span>学历</div>' +
+        '<el-select v-model="educationSelect"  placeholder="请选择学历">' +
+        '      <el-option label="博士研究生" value="1"></el-option>' +
+        '      <el-option label="硕士研究生" value="2"></el-option>' +
+        '      <el-option label="本科" value="3"></el-option>' +
+        '      <el-option label="专科" value="4"></el-option>' +
+        '    </el-select>' +
+        '    </div>' +
         '  <el-input class="user-info-input" placeholder="" v-model="nation">' +
         '    <template slot="prepend"><span class="input-important-tag">*</span>民族</template>' +
         '  </el-input>' +
@@ -361,6 +370,7 @@ tabTyp.userInfo = {
             email: userInfo.email,
             address: userInfo.address,
             sexSelect: userInfo.sex,
+            educationSelect: userInfo.education,
             schoolSelect: userInfo.schoolId,
             remark: userInfo.remark,
             imageUrl: userInfo.sicImage,
@@ -437,7 +447,7 @@ tabTyp.worksInfo = {
         '  :file-list="fileList"' +
         '  :auto-upload="false">' +
         '  <el-button slot="trigger" size="small" type="primary">选取文件</el-button>' +
-        '  <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">上传到服务器</el-button>' +
+        '  <el-button style="margin-left: 10px;" size="small" type="success" @click="submitUpload">提交作品</el-button>' +
         '  <div slot="tip" class="el-upload__tip">只能上传zip文件，且不超过200MB。</div>' +
         '</el-upload>'+
         '</div>'

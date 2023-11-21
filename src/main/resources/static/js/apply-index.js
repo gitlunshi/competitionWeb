@@ -344,3 +344,29 @@ function errorResDeal(rs){
     }
     app.$message.error(rs.msg);
 }
+function isPostWorkTime(){
+    let data=false;
+    $.ajax({
+        type: 'GET', // 规定请求的类型（GET 或 POST）
+        url: '/systemInfo/isPostWorkTime', // 请求的url地址
+        dataType: 'json', //预期的服务器响应的数据类型
+        async:false,
+        beforeSend: function () { //发送请求前运行的函数（发送之前就会进入这个函数）
+
+        },
+        success: function (result) { // 当请求成功时运行的函数
+            if (result.code!=200){
+
+                errorResDeal(result);
+            }else{
+                data=result.data;
+            }
+        },
+        error: function (result) { //失败的函数
+
+        },
+        complete: function () { //请求完成时运行的函数（在请求成功或失败之后均调用，即在 success 和 error 函数之后，不管成功还是失败 都会进这个函数）
+        }
+    });
+    return data;
+}
