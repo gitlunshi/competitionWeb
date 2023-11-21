@@ -109,6 +109,18 @@ public class UserController extends BaseController {
         return Result.ok();
     }
 
+    @ApiOperation(value = "查询用户是否登录", notes = "")
+    @GetMapping("/isLogin")
+    public Result isLogin(HttpServletRequest request) {
+        HttpSession session = request.getSession();
+        User user = (User)session.getAttribute("user");
+        if (user!=null){
+            return Result.ok(true);
+        }else{
+            return Result.ok(false);
+        }
+    }
+
     @ApiOperation(value = "用户信息修改", notes = "")
     @PostMapping("/modifyUserInfo")
     @LoginValidator
