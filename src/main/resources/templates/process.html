@@ -10,7 +10,7 @@
   <script src="../static/js/jquery-3.7.1.min.js"></script>
   <script src="../static/js/vue.js"></script>
   <script src="../static/js/element-ui.js"></script>
-
+  <link rel="icon" href="/static/img/favicon.ico" type="image/x-icon" />
 </head>
 
 
@@ -27,7 +27,7 @@
         <a href="process.html" class="Menu_item">比赛流程</a>
 
         <a v-if="isLoggedIn" href="apply/index.html" class="Menu_item">比赛报名</a>
-        <a v-else href="apply/login.html" class="Menu_item">比赛报名</a>
+        <a v-else href="/apply" class="Menu_item">比赛报名</a>
 
         <a href="contact.html" class="Menu_item">联系我们</a>
         <a href="download.html" class="Menu_item">资料下载</a>
@@ -36,7 +36,7 @@
         <img src="../static/img/user_icon1.png" style="width: 35px;height: 35px;vertical-align: middle;margin-top:-8px">
 
         <a v-if="isLoggedIn" href="apply/index.html">个人中心</a>
-        <a v-else href="apply/login.html">登录/注册</a>
+        <a v-else href="/apply">登录/注册</a>
 
       </div>
     </div>
@@ -62,7 +62,7 @@
     <p style="font-size: 20px; color: #909399;line-height: 1.5;">3.&nbsp;人体三维重建：创建参赛者的精确三维模型，以便进行更精细的数据分析和可视化展示。通过三维重建技术，可以精确捕捉和分析参赛者的运动轨迹和姿势，帮助教练和参赛者优化运动技能和提高竞技水平。基于三维重建的参赛者模型，可以创建虚拟训练场景，让参赛者在虚拟环境中进行个性化训练和体验，提高训练效果和竞技水平。</p>
     <p style="font-size: 28px; color: #333;">二、参赛要求：</p>
     <p style="font-size: 20px; color: #909399;line-height: 1.5;">参赛选手应为河南大学在籍学生（包含本科、硕士、博士），学生以团队形式参赛，团队成员不得少于3人，同一参赛选手只能参加一个竞赛项目，不接受学生个人报名。</p>
-    <p style="font-size: 20px; color: #909399;line-height: 1.5;">竞赛采用网上报名形式，具体报名流程和事项另行通知。报名截止日期为XXXX年XX月XX日，逾期报名将不予受理，报名日期截止后不得随意更换参赛选手和选题。</p>
+    <p style="font-size: 20px; color: #909399;line-height: 1.5;">竞赛采用网上报名形式，具体报名流程和事项另行通知。报名截止日期为2023年12月15日，逾期报名将不予受理，报名日期截止后不得随意更换参赛选手和选题。</p>
     <p style="font-size: 28px; color: #333; float: left;">三、比赛规则：</p>
     <button class="download-button" @click="downloadFile">下载比赛规则</button>
     <div style="clear: both;"></div>
@@ -85,13 +85,14 @@
       <div class="link">
         <h2>友情链接</h2>
         <p><a href="https://www.henu.edu.cn/" style="text-decoration: none; color: inherit;">河南大学</a></p>
-        <p>主办单位：<a href="https://software.henu.edu.cn/" style="text-decoration: none; color: inherit;">河南大学软件学院</a></p>
-        <p>承办单位：河南大学智慧网络研究院&nbsp;<a href="https://www.hnzzw.com/" style="text-decoration: none; color: inherit;">河南众知物科技有限公司</a></p>
+        <p>主办单位：<a href="https://henu.goworkla.cn/" style="text-decoration: none; color: inherit;">河南大学就业创业指导中心</a></p>
+        <p>承办单位：<a href="https://software.henu.edu.cn/" style="text-decoration: none; color: inherit;">河南大学软件学院</a></p>
+        <p>支持单位：河南众知物科技有限公司&nbsp;&nbsp;&nbsp;河南大学数字体育协同创新中心</a></p>
       </div>
       <div class="aboutus">
         <h2>联系方式</h2>
-        <p>报名：16666666666</p>
-        <p>邮箱：111111111@qq.com</p>
+        <p>报名：19513359603</p>
+        <p>邮箱：364299279@qq.com</p>
         <p>地址：河南省开封市龙亭区东京大道河南大学</p>
       </div>
       <div class="pic_font">

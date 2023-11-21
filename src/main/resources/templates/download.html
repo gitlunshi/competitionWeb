@@ -9,6 +9,7 @@
   <script src="../static/js/jquery-3.7.1.min.js"></script>
   <script src="../static/js/vue.js"></script>
   <script src="../static/js/element-ui.js"></script>
+  <link rel="icon" href="/static/img/favicon.ico" type="image/x-icon" />
 </head>
 
 <body>
@@ -24,7 +25,7 @@
         <a href="process.html" class="Menu_item">比赛流程</a>
 
         <a v-if="isLoggedIn" href="apply/index.html" class="Menu_item">比赛报名</a>
-        <a v-else href="apply/login.html" class="Menu_item">比赛报名</a>
+        <a v-else href="/apply" class="Menu_item">比赛报名</a>
 
         <a href="contact.html" class="Menu_item">联系我们</a>
         <a href="download.html" class="Menu_item">资料下载</a>
@@ -32,7 +33,7 @@
       <div class="H_right">
         <img src="../static/img/user_icon1.png" style="width: 35px;height: 35px;vertical-align: middle;margin-top:-8px">
         <a v-if="isLoggedIn" href="apply/index.html">个人中心</a>
-        <a v-else href="apply/login.html">登录/注册</a>
+        <a v-else href="/apply">登录/注册</a>
       </div>
     </div>
   </div>
@@ -52,13 +53,14 @@
       <div class="link">
         <h2>友情链接</h2>
         <p><a href="https://www.henu.edu.cn/" style="text-decoration: none; color: inherit;">河南大学</a></p>
-        <p>主办单位：<a href="https://software.henu.edu.cn/" style="text-decoration: none; color: inherit;">河南大学软件学院</a></p>
-        <p>承办单位：河南大学智慧网络研究院&nbsp;<a href="https://www.hnzzw.com/" style="text-decoration: none; color: inherit;">河南众知物科技有限公司</a></p>
+        <p>主办单位：<a href="https://henu.goworkla.cn/" style="text-decoration: none; color: inherit;">河南大学就业创业指导中心</a></p>
+        <p>承办单位：<a href="https://software.henu.edu.cn/" style="text-decoration: none; color: inherit;">河南大学软件学院</a></p>
+        <p>支持单位：河南众知物科技有限公司&nbsp;&nbsp;&nbsp;河南大学数字体育协同创新中心</a></p>
       </div>
       <div class="aboutus">
         <h2>联系方式</h2>
-        <p>报名：16666666666</p>
-        <p>邮箱：111111111@qq.com</p>
+        <p>报名：19513359603</p>
+        <p>邮箱：364299279@qq.com</p>
         <p>地址：河南省开封市龙亭区东京大道河南大学</p>
       </div>
       <div class="pic_font">
