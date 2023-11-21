@@ -1,7 +1,19 @@
 .download-button {
-    float: right;
-    margin-right: 74%;
-    margin-top: 30px;
+    /*display: block;*/
+    /*float: right;*/
+    /*margin-right: 74%;*/
+    /*margin-top: 30px;*/
+    /*padding: 10px 20px;*/
+    /*background-color: #4CAF50;*/
+    /*color: white;*/
+    /*border: none;*/
+    /*border-radius: 5px;*/
+    /*cursor: pointer;*/
+    /*font-size: 16px;*/
+    display: block;
+    position: absolute;
+    margin-top: 1.5%;  /* 调整按钮与顶部的距离 */
+    margin-left: 15%;  /* 调整按钮与右侧的距离 */
     padding: 10px 20px;
     background-color: #4CAF50;
     color: white;
@@ -9,4 +21,5 @@
     border-radius: 5px;
     cursor: pointer;
     font-size: 16px;
+    text-decoration: none;  /* 去除默认的链接下划线 */
 }
