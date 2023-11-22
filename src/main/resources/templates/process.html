@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>比赛流程 </title>
+  <title>比赛介绍 </title>
   <meta charset="UTF-8">
   <link rel="stylesheet" href="../static/css/element-ui.css"/>
   <link rel="stylesheet" href="../static/css/new_index.css"/>
@@ -24,13 +24,13 @@
     <div class="H_middle">
       <div class="H_left">
         <a href="index.html" class="Menu_item">网站首页</a>
-        <a href="process.html" class="Menu_item">比赛流程</a>
+        <a href="process.html" class="Menu_item">比赛介绍</a>
 
         <a v-if="isLoggedIn" href="/apply" class="Menu_item">比赛报名</a>
         <a v-else href="/apply" class="Menu_item">比赛报名</a>
 
         <a href="contact.html" class="Menu_item">联系我们</a>
-        <a href="download.html" class="Menu_item">资料下载</a>
+        <a href="download.html" class="Menu_item">比赛章程</a>
       </div>
       <div class="H_right">
         <img src="../static/img/user_icon1.png" style="width: 35px;height: 35px;vertical-align: middle;margin-top:-8px">
@@ -65,70 +65,72 @@
     <p style="font-size: 28px; color: #333;">二、参赛要求：</p>
     <p style="font-size: 20px; color: #909399;line-height: 1.5;">参赛选手应为河南大学在籍学生（包含本科、硕士、博士），学生以团队形式参赛，团队成员不得少于3人，同一参赛选手只能参加一个竞赛项目，不接受学生个人报名。</p>
     <p style="font-size: 20px; color: #909399;line-height: 1.5;">竞赛采用网上报名形式，具体报名流程和事项另行通知。报名截止日期为2023年12月15日，逾期报名将不予受理，报名日期截止后不得随意更换参赛选手和选题。</p>
-    <p style="font-size: 28px; color: #333; float: left;">三、比赛规则：</p>
-    <a class="download-button" href="download.html">下载比赛规则</a>
+<!--    <p style="font-size: 28px; color: #333; float: left;">三、比赛规则：</p>-->
+<!--    <a class="download-button" href="download.html">下载比赛规则</a>-->
+
     <div style="clear: both;"></div>
   </div>
+  <div style=" margin-top: 24px;margin-left: 6%;margin-right: 6%">
+    <p style="font-size: 28px; color: #333; float: left;">三、比赛规则：</p>
+  </div>
+  <div class="Big">
+    <div class="Four">
+      <!-- 项目分类图片 -->
+      <div class="pr_pic">
+        <div class="game_item">
+          <a href="process.html" style="color: black;">
+            <img src="../static/img/tinyweixin.png">
+            <div>小程序开发</div>
+          </a>
+        </div>
+        <div class="game_item" >
+          <a href="process.html" style="color: black;">
+            <img src="../static/img/web1.jpg">
+            <div>WEB开发</div>
+          </a>
+        </div>
+        <div class="game_item">
+          <a href="process.html" style="color: black;">
+            <img src="../static/img/Android1.png">
+            <div>安卓/IOS开发</div>
+          </a>
+        </div>
+      </div>
+      <div class="pr_pic">
+        <div class="game_item">
+          <a href="process.html" style="color: black;">
+            <img src="../static/img/facedetect1.png">
+            <div>人脸识别替换</div>
+          </a>
+        </div>
+        <div class="game_item">
+          <a href="process.html" style="color: black;">
+            <img src="../static/img/posedetect1.jpg">
+            <div>实时体育动作识别</div>
+          </a>
+        </div>
+        <div class="game_item">
+          <a href="process.html" style="color: black;">
+            <img src="../static/img/3Dpose1.jpg">
+            <div>三维人体重建</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div><BR><BR>
+
+    <div style="clear: both;"></div>
+
+
 
   <div style=" margin-top: 24px;margin-left: 6%;margin-right: 6%">
     <p style="font-size: 28px; color: #333;">四、奖项设置：</p>
     <img :src="'../static/img/prize.jpg' " style="width: 600px; ">
   </div>
 
-  <div style=" margin-top: 24px;margin-left: 6%;margin-right: 6%">
-    <p style="font-size: 28px; color: #333;">五、比赛章程：</p>
-    <p style="font-size: 20px; color: #909399;line-height: 1.5;font-weight: bold">第一章&nbsp&nbsp总则</p>
-    <p style="font-size: 20px; color: #909399;line-height: 2;">
-      第一条&nbsp&nbsp河南大学大学生智慧篮球竞赛是由河南大学主办，河南大学就业指导中心、河南大学软件学院承办，河南大学各学院大学生对科技及篮球运动爱好者参与的智慧篮球竞赛活动。
-      <br>第二条&nbsp&nbsp竞赛应本着“公平、公正、公开、科学、创新”的原则组织进行，坚持竞赛的公益性、非盈利性。
-      <br>第三条&nbsp&nbsp大赛的目的：促进高等学校素质教育，培养大学生的综合知识运用能力、基本工程实践能力和创新意识，激发大学生从事科学研究与探索的兴趣和潜能以及对篮球的热爱,倡导理论联系实际、求真务实的学风和团队协作的人文精神，为优秀人才的脱颖而出创造条件。
-      <br>第四条&nbsp&nbsp大赛的内容：根据专家建议设立两个竞赛大项，大项下可设小项，选取在河南大学中开展较好，有群众基础的项目，积极探索的竞赛项目。</p>
-    <p style="font-size: 20px; color: #909399;line-height: 1.5;font-weight: bold">第二章&nbsp&nbsp组织机构及其职责</p>
-    <p style="font-size: 20px; color: #909399;line-height: 2;">
-      第五条&nbsp&nbsp河南大学大学生智慧篮球竞赛设立组织委员会，由主办单位、承办单位的有关负责人及专家组成。
-      <br>第六条&nbsp&nbsp组织委员会的职责如下：
-      <br>1．审议、修改大赛章程；
-      <br>2．确定大赛承办单位；
-      <br>3．根据专家委员会建议，确定竞赛项目、竞赛规则等
-      <br>4．筹集大赛组织、奖励所需的经费；
-      <br>5．议决其它应由组织委员会议决的事项。
-      <br>第七条&nbsp&nbsp河南大学大学生智慧篮球竞赛设立专家委员会，
-          由河南大学网络研究院工作知名度较高的专家组成，原则上各项目负责人是专家委员会成员，委员会设主任一人，副主任一名、秘书长一名、委员若干名。
-      <br>第八条&nbsp&nbsp专家委员会的职责如下：
-      <br>1．竞赛项目的遴选、执行、淘汰；
-      <br>2．竞赛规则的制定；
-      <br>3．组建裁判委员会，确定裁判委员会名单；
-      <br>4．组织委员会安排的其它工作。
-      <br>第九条&nbsp&nbsp河南大学大学生智慧篮球竞赛设立裁判委员会，
-      原则上由各项目负责人或项目负责人指定的人员组成，裁判委员会负责比赛期间的裁判工作。</p>
-    <p style="font-size: 20px; color: #909399;line-height: 1.5;font-weight: bold">第三章&nbsp&nbsp组织机构及其职责</p>
-    <p style="font-size: 20px; color: #909399;line-height: 2;">
-      第十条&nbsp&nbsp为保证河南大学大学生智慧篮球竞赛评奖工作的公正性，对评奖结果坚持执行异议制度，异议须由参赛队指导教师代表参赛队伍以书面形式向大赛仲裁委员会提出，异议提出者须签署本人姓名，注明参赛队伍所在单位、通信地址，具体事由等。
-      仲裁委员会必须对提出异议的参赛队伍及所在单位严格保密并负责协调解决。
-    </p>
-    <p style="font-size: 20px; color: #909399;line-height: 1.5;font-weight: bold">第四章&nbsp&nbsp经费管理和使用</p>
-    <p style="font-size: 20px; color: #909399;line-height: 2;">
-      第十一条&nbsp&nbsp成立财务委员会，成员不少于三人，实行收支分离。
-      <br>第十二条&nbsp&nbsp竞赛收取的相关费用在组织委员会监督下使用。
-      <br>第十三条&nbsp&nbsp在征得组委会同意的前提下，本着平等互利、充分保护参赛学生相关权益的基础上，可争取社会赞助。
-      对于赞助单位可视情况给予竞赛冠名权。赞助经费纳入竞赛经费统一管理，不可挪作他用。
-      <br>第十四条&nbsp&nbsp承办单位可根据预算情况，向组织委员会申请，从财务委员会支出费用。
-      <br>第十五条&nbsp&nbsp比赛结束后，半年内应向组委会和专委会公布经费收支明细，经费结余的，由组织委员会暂时保管，下一年比赛使用。
-    </p>
-    <p style="font-size: 20px; color: #909399;line-height: 1.5;font-weight: bold">第五章&nbsp&nbsp奖励</p>
-    <p style="font-size: 20px; color: #909399;line-height: 2;">
-      第十六条&nbsp&nbsp大赛本着“公平、公正、公开”的原则进行，针对每个竞赛项目评选出一、二、三等奖、优秀奖等奖项。
-      <br>第十七条&nbsp&nbsp根据大赛的特点，组委会可根据需要增减若干其他奖项，并报组委会批准。
-    </p>
-    <p style="font-size: 20px; color: #909399;line-height: 1.5;font-weight: bold">第六章&nbsp&nbsp附则</p>
-    <p style="font-size: 20px; color: #909399;line-height: 2;">
-      第十八条&nbsp&nbsp本章程自组织委员会通过之日起生效，由竞赛主办单位及组织委员会负责解释。
-    </p>
 
-  </div>
-
-  <div style=" margin-top: 24px;margin-left: 6%;margin-right: 6%">
-    <p style="font-size: 28px; color: #333;">六、其他事项：</p>
+  <div style=" margin-top: 40px;margin-left: 6%;margin-right: 6%">
+    <p style="font-size: 28px; color: #333;">五、其他事项：</p>
     <p style="font-size: 20px; color: #909399;line-height: 1.5;">竞赛组委会办公室设在河南大学软件学院，有关竞赛的其它事宜，竞赛组委会将另行通知。</p>
   </div>
 
