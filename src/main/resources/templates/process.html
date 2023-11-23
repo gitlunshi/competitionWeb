@@ -59,7 +59,7 @@
     <p style="font-size: 20px; color: #909399;line-height: 1.5;">2.&nbsp;WEB开发：创建一个面向参赛者、观众和组织者的综合性网站。这个网站应该能够提供关于比赛信息、报名流程、赛程安排、比赛结果、参赛者数据分析等方面的服务。开发一个展示体育比赛的基本信息，包括时间、地点、参赛规则等内容的网站，可针对视频进行剪辑下载发布等。或搭建可运行深度学习模型的平台。可以为参赛者、观众和组织者提供一个全面、智能化、互动性强的比赛信息平台，促进比赛的顺利进行和更好的体育健康体验。</p>
     <p style="font-size: 20px; color: #909399;line-height: 1.5;">3.&nbsp;安卓和IOS开发：面向移动设备的应用程序，以提供智能体育体验和服务。开发一个安全、稳定的用户注册和登录系统，允许用户创建个人账户并管理个人信息。提供比赛信息的浏览功能，为用户提供训练计划、健身建议和个性化指导，帮助他们改善运动表现和健康状况。社交平台，让用户可以分享运动成果、互动交流，并与其他用户建立连接和社区。</p>
     <p style="font-size: 20px; color: #606266;font-weight: bold">人工智能组</p>
-    <p style="font-size: 20px; color: #909399;line-height: 1.5;">1.&nbsp;人脸识别与替换：通过人脸识别技术，参赛者可以在虚拟场景中进行个性化的体育训练和体验，比如与虚拟教练进行互动、参与虚拟比赛等。通过分析参赛者的面部表情和动作，人脸识别技术可以提供实时的身体姿势分析和反馈，帮助参赛者改善运动技能和训练效果。利用人脸识别和替换技术，比赛现场可以设置互动娱乐装置，让观众可以与虚拟角色进行互动，增加比赛的趣味性和参与度。通过人脸识别和替换技术，参与者可以定制自己的虚拟形象，与其他参赛者进行个性化的互动和社交交流，增强比赛的社交性和趣味性。</p>
+    <p style="font-size: 20px; color: #909399;line-height: 1.5;">1.&nbsp;人脸识别与替换：通过人脸识别替换技术，参赛者可以在虚拟场景中进行个性化的体育训练和体验，比如与虚拟教练进行互动、参与虚拟比赛等。通过分析参赛者的面部表情和动作，人脸识别技术可以提供实时的身体姿势分析和反馈，帮助参赛者改善运动技能和训练效果。利用人脸识别和替换技术，比赛现场可以设置互动娱乐装置，让观众可以与虚拟角色进行互动，增加比赛的趣味性和参与度。通过人脸识别和替换技术，参与者可以定制自己的虚拟形象，与其他参赛者进行个性化的互动和社交交流，增强比赛的社交性和趣味性。</p>
     <p style="font-size: 20px; color: #909399;line-height: 1.5;">2.&nbsp;实时体育动作识别：通过实时监测参赛者的体育动作，可以提供针对性的姿势纠正和优化建议，帮助参赛者改善运动技能和提高竞技水平。实时分析比赛中的参赛者动作，为裁判和观众提供客观的实况分析和裁决参考，提高比赛的公平性和透明度。基于实时的动作识别数据，可以提供即时的反馈和调整建议，让参赛者能够快速调整动作和策略，提高比赛表现和成绩。</p>
     <p style="font-size: 20px; color: #909399;line-height: 1.5;">3.&nbsp;人体三维重建：创建参赛者的精确三维模型，以便进行更精细的数据分析和可视化展示。通过三维重建技术，可以精确捕捉和分析参赛者的运动轨迹和姿势，帮助教练和参赛者优化运动技能和提高竞技水平。基于三维重建的参赛者模型，可以创建虚拟训练场景，让参赛者在虚拟环境中进行个性化训练和体验，提高训练效果和竞技水平。</p>
     <p style="font-size: 28px; color: #333;">二、参赛要求：</p>
@@ -73,47 +73,47 @@
   <div style=" margin-top: 24px;margin-left: 6%;margin-right: 6%">
     <p style="font-size: 28px; color: #333; float: left;">三、比赛规则：</p>
   </div>
-  <div class="Big">
+  <div class="Big2">
     <div class="Four">
       <!-- 项目分类图片 -->
       <div class="pr_pic">
         <div class="game_item">
-          <a href="process.html" style="color: black;">
+          <div style="color: black;" @click="downloadFile('basketballdetection_demo.zip')">
             <img src="../static/img/tinyweixin.png">
-            <div>小程序开发</div>
-          </a>
+            <div style="margin-top: -12px">小程序开发&nbsp;&nbsp;规则下载</div>
+          </div>
         </div>
         <div class="game_item" >
-          <a href="process.html" style="color: black;">
+          <div style="color: black;" @click="downloadFile('basketballdetection_demo.zip')">
             <img src="../static/img/web1.jpg">
-            <div>WEB开发</div>
-          </a>
+            <div style="margin-top: -12px">WEB开发&nbsp;&nbsp;规则下载</div>
+          </div>
         </div>
         <div class="game_item">
-          <a href="process.html" style="color: black;">
-            <img src="../static/img/Android1.png">
-            <div>安卓/IOS开发</div>
-          </a>
+          <div style="color: black;" @click="downloadFile('basketballdetection_demo.zip')">
+            <img src="../static/img/Android.jpg">
+            <div style="margin-top: -12px">安卓/IOS开发&nbsp;&nbsp;规则下载</div>
+          </div>
         </div>
       </div>
       <div class="pr_pic">
         <div class="game_item">
-          <a href="process.html" style="color: black;">
+          <div style="color: black;" @click="downloadFile('basketballdetection_demo.zip')">
             <img src="../static/img/facedetect1.png">
-            <div>人脸识别替换</div>
-          </a>
+            <div style="margin-top: -12px">人脸识别替换&nbsp;&nbsp;规则下载</div>
+          </div>
         </div>
         <div class="game_item">
-          <a href="process.html" style="color: black;">
+          <div style="color: black;" @click="downloadFile('basketballdetection_demo.zip')">
             <img src="../static/img/posedetect1.jpg">
-            <div>实时体育动作识别</div>
-          </a>
+            <div style="margin-top: -12px">实时体育动作识别&nbsp;&nbsp;规则下载</div>
+          </div>
         </div>
-        <div class="game_item">
-          <a href="process.html" style="color: black;">
+        <div class="game_item" @click="downloadFile">
+          <div style="color: black;" @click="downloadFile('basketballdetection_demo.zip')">
             <img src="../static/img/3Dpose1.jpg">
-            <div>三维人体重建</div>
-          </a>
+            <div style="margin-top: -12px">三维人体重建&nbsp;&nbsp;规则下载</div>
+          </div>
         </div>
       </div>
     </div>
@@ -196,6 +196,44 @@
     methods: {
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
+      },
+      async downloadFile(filename) {
+        const fileUrl = '../static/file/basketballdetection_demo.zip';
+
+        try {
+          // Fetch the file content using AJAX
+          const response = await fetch(fileUrl);
+
+          // Check if the fetch was successful
+          if (!response.ok) {
+            throw new Error(`Failed to fetch file: ${response.statusText}`);
+          }
+
+          // Get the file content as a blob
+          const blob = await response.blob();
+
+          // Create a Blob URL for the file content
+          const blobUrl = URL.createObjectURL(blob);
+
+          // Create a link element
+          const link = document.createElement('a');
+          link.href = blobUrl;
+          link.download = filename;
+
+          // Append the link to the body
+          document.body.appendChild(link);
+
+          // Trigger a click on the link to initiate the download
+          link.click();
+
+          // Remove the link from the DOM
+          document.body.removeChild(link);
+
+          // Revoke the Blob URL to free up resources
+          URL.revokeObjectURL(blobUrl);
+        } catch (error) {
+          console.error('Error fetching or downloading file:', error);
+        }
       },
     }
   }
