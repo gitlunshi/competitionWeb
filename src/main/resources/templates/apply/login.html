@@ -107,6 +107,7 @@
                         dataType: 'json', //预期的服务器响应的数据类型
                         data: form,//规定要发送到服务器的数据
                         contentType:"application/x-www-form-urlencoded",
+                        async:false,
                         beforeSend: function () { //发送请求前运行的函数（发送之前就会进入这个函数）
 
                         },
@@ -114,7 +115,7 @@
                             if (result.code!=200){
                                 app.$message.error(result.msg);
                             }else{
-                                location.href="/apply";
+                                location.href="/apply?time="+new Date();
                             }
                         },
                         error: function (result) { //失败的函数
@@ -148,7 +149,7 @@
                                 $("#reCode-img").attr("src","/common/captcha?time="+new Date());
                                 app.$message.error(result.msg);
                             }else{
-                                location.href="/apply";
+                                location.href="/apply?time="+new Date();
                             }
                         },
                         error: function (result) { //失败的函数
