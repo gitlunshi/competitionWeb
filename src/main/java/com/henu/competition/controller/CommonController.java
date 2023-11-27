@@ -74,4 +74,11 @@ public class CommonController extends BaseController {
     public void resourceFile(@PathVariable @NotBlank String file, HttpServletRequest request, HttpServletResponse response) throws IOException {
         commonService.resourceFile(file,request,response);
     }
+
+    @ApiOperation(value = "下载竞赛文档",notes = "直接返回资源文件")
+    @GetMapping("/download/{file}")
+    @ApiImplicitParam(name = "file", value = "文件名,带后缀", required = true)
+    public void download(@PathVariable @NotBlank String file, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        commonService.downloadCompettionDoc(file,request,response);
+    }
 }

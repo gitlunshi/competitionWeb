@@ -80,6 +80,10 @@ public class CommonService {
             this.responseFile(path,response);
     }
 
+    public void downloadCompettionDoc(String file, HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String path=filePath+ConstantValue.COMP_DOC_PATH+file;
+        this.responseFile(path,response);
+    }
 
     public void responseFile(String path,HttpServletResponse response) {
         File file = new File(path);
@@ -94,6 +98,7 @@ public class CommonService {
         String mimeType = mimetypesFileTypeMap.getContentType(file);
         //设置返回的内容
         response.setContentType(mimeType);
+        response.setContentLengthLong(file.length());
         try {
             output = response.getOutputStream();
             input = new FileInputStream(file);

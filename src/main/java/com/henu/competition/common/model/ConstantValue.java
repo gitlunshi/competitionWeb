@@ -17,6 +17,10 @@ public class ConstantValue {
     //上传的文档文件保存的路径
     public final static String DOC_SAVE_PATH ="doc/";
 
+    //竞赛文档路径
+    public final static String COMP_DOC_PATH ="compdoc/";
+
+
     //上传的其它文件保存的路径
     public final static String OTHER_SAVE_PATH ="other/";
 }

@@ -304,14 +304,11 @@ a{
     text-align:center;
     font-size:18px;
     cursor:pointer;
-    height:70px;
     line-height: 70px;
     position: relative;
-
     color: #000; /* Set the default text color */
     transition: color 0.3s ease; /* Add a smooth transition effect for color */
     overflow: hidden; /* Hide the overflow to clip the background */
-
 }
 .Menu_item::before{
     content: "";

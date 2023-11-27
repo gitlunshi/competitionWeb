@@ -21,11 +21,9 @@
         </div>
         <div class="H_middle">
             <div class="H_left">
-                <a href="index.html" class="Menu_item">网站首页</a>
+                <a href="index.html" class="Menu_item Menu_item_active">网站首页</a>
                 <a href="process.html" class="Menu_item">比赛介绍</a>
-
-                <a v-if="isLoggedIn" href="/apply" class="Menu_item">比赛报名</a>
-                <a v-else href="/apply" class="Menu_item">比赛报名</a>
+                <a  href="/apply" class="Menu_item">比赛报名</a>
                 <a href="contact.html" class="Menu_item">联系我们</a>
 
                 <a href="download.html" class="Menu_item">比赛章程</a>
@@ -44,7 +42,7 @@
         <img src="../static/img/basketbanner.jpg" >
         <div class="top_word">
             <div class="Top_word">河南大学智慧篮球竞赛</div>
-            <div class="Top_word2">时间：2023年11月13日—12月29日</div>
+            <div class="Top_word2">时间：2023年11月27日—2024年1月7日</div>
             <div class="Top_word3">地点：河南大学(金明校区)</div>
         </div>
     </div>
@@ -68,7 +66,7 @@
                     提升体育参与者运动体验感，保障其运动质量。为引导激励我校学生积极响应创新创造的时代号召，
                     激发大学生从事科学研究与探索的兴趣和潜能以及对体育的热爱，倡导理论联系实际、求真务实的学风和团队协作的人文精神，
                     提升我校学生的创新能力、实践能力、协作精神、科学和身体素质，培养更多人工智能领域和工程项目所需人才，
-                    河南大学智慧网络研究院和河南众知物科技有限公司定于2023年11月13日至12月29日在河南大学(金明校区)，
+                    河南大学智慧网络研究院和河南众知物科技有限公司定于2023年11月27日至2024年1月7日在河南大学(金明校区)，
                     举办河南大学大学生智慧体育竞赛。
                 </div>
             </div>
@@ -90,8 +88,8 @@
                     <div style="margin-bottom:20px;font-size:25px;">赛事安排</div>
                 </div>
                 <div class="time_Data">
-                    <div class="Data_item">2023-11-13</div>
-                    <div class="Data_item">2023-12-15</div>
+                    <div class="Data_item">2023-11-27</div>
+                    <div class="Data_item">2023-12-11</div>
                     <div class="Data_item">2023-12-29</div>
                     <div class="Data_item">2024-01-07</div>
                 </div>
@@ -159,8 +157,8 @@
             <div class="pr_pic">
                 <div class="game_item">
                     <a href="process.html" style="color: black;">
-                        <img src="../static/img/facedetect1.png">
-                        <div style="margin-top: -3px">人脸识别替换</div>
+                        <img src="../static/img/ciar.png">
+                        <div style="margin-top: -3px">人物识别替换</div>
                     </a>
                 </div>
                 <div class="game_item">
@@ -268,10 +266,10 @@
         computed: {
             computedActive() {
                 const currentLocalTime = new Date();
-                const step1StartTime = new Date('2023-11-21T00:00:00'); // Replace with your start time
-                const step2StartTime = new Date('2023-12-15T00:00:00'); // Replace with your start time
+                const step1StartTime = new Date('2023-11-27T00:00:00'); // Replace with your start time
+                const step2StartTime = new Date('2023-12-11T00:00:00'); // Replace with your start time
                 const step3StartTime = new Date('2023-12-29T00:00:00'); // Replace with your start time
-                const step4StartTime = new Date('2023-01-07T00:00:00'); // Replace with your start time
+                const step4StartTime = new Date('2024-01-07T00:00:00'); // Replace with your start time
                 // Add more steps as needed
                 const stripTime = (date) => new Date(date.getFullYear(), date.getMonth(), date.getDate());
 

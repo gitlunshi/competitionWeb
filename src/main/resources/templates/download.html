@@ -43,7 +43,7 @@
     <img src="../static/img/basketbanner.jpg" >
     <div class="top_word">
       <div class="Top_word">河南大学智慧篮球竞赛</div>
-      <div class="Top_word2">时间：2023年11月13日—12月29日</div>
+      <div class="Top_word2">时间：2023年11月27日—2024年1月7日</div>
       <div class="Top_word3">地点：河南大学(金明校区)</div>
     </div>
   </div>
@@ -95,7 +95,7 @@
     </p>
     <p style="font-size: 20px; color: #909399;line-height: 1.5;font-weight: bold">第六章&nbsp&nbsp附则</p>
     <p style="font-size: 20px; color: #909399;line-height: 2;">
-      第十八条&nbsp&nbsp竞赛所有资料归主办方所有。
+      第十八条&nbsp&nbsp竞赛参加团队所提交的任何资料归主办方所有，主办方拥有最终解释权。
       <br>第十九条&nbsp&nbsp本章程自组织委员会通过之日起生效，由竞赛主办单位及组织委员会负责解释。
 
     </p>
@@ -182,15 +182,7 @@
       };
     },
     methods: {
-      downloadFile() {
-        // 创建一个临时的下载链接
-        const url = 'https://example.com/yourfile.pdf'; // 你要下载的文件的 URL
-        const link = document.createElement('a');
-        link.href = url;
-        link.setAttribute('download', 'filename.pdf'); // 设置下载文件的名称
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link); // 之后删除该链接
+      download() {
       },
 
     }
