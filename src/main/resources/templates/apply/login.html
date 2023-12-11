@@ -55,7 +55,7 @@
 <!--            <span>您可以选择以上几种方式登陆您的账户!</span>-->
             <input v-model="logUserName" type="text" placeholder="用户名">
             <input v-model="logPassword" type="password" placeholder="密码">
-            <a style="visibility: hidden;" href="#">忘记密码？</a>
+<!--            <a style="visibility: hidden;" href="#">忘记密码？</a>-->
             <button @click="loginClick()">登陆</button>
             </form>
         </div>
@@ -115,7 +115,7 @@
                             if (result.code!=200){
                                 app.$message.error(result.msg);
                             }else{
-                                location.href="/apply?time="+new Date();
+                                location.reload(true);
                             }
                         },
                         error: function (result) { //失败的函数
@@ -149,7 +149,7 @@
                                 $("#reCode-img").attr("src","/common/captcha?time="+new Date());
                                 app.$message.error(result.msg);
                             }else{
-                                location.href="/apply?time="+new Date();
+                                location.reload(true);
                             }
                         },
                         error: function (result) { //失败的函数

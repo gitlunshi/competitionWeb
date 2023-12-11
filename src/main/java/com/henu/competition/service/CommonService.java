@@ -1,10 +1,16 @@
 package com.henu.competition.service;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.henu.competition.common.exception.BizException;
 import com.henu.competition.common.model.ConstantValue;
+import com.henu.competition.model.SchoolInfo;
+import com.henu.competition.model.Squadron;
+import com.henu.competition.model.SquadronUserMap;
+import com.henu.competition.model.User;
 import com.ramostear.captcha.HappyCaptcha;
 import com.ramostear.captcha.support.CaptchaStyle;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -18,7 +24,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Paths;
-import java.util.UUID;
+import java.util.*;
 
 /**
  * Service接口实现
@@ -33,8 +39,17 @@ public class CommonService {
     @Value("${file-path}")
     private String filePath;
 
+    @Autowired
+    UserService userService;
 
+    @Autowired
+    SquadronService squadronService;
 
+    @Autowired
+    SquadronUserMapService squadronUserMapService;
+
+    @Autowired
+    SchoolInfoService schoolInfoService;
     public void captcha(HttpServletRequest request, HttpServletResponse response) {
         HappyCaptcha.require(request, response)
                 .style(CaptchaStyle.IMG)            //设置展现样式为图片
@@ -130,5 +145,56 @@ public class CommonService {
         return filePath + lFilePath;
     }
 
+    public Map bigScreenPlay(){
+
+
+        List<User> list1 = userService.list();
+        QueryWrapper<User> userQueryWrapper=new QueryWrapper<>();
+        userQueryWrapper.lambda().isNotNull(User::getRealName);
+        List<User> list2 = userService.list(userQueryWrapper);
+        long qNum = squadronService.count();
+        long qmNUm = squadronUserMapService.count();
+
+        QueryWrapper<User> queryWrapper=new QueryWrapper<>();
+        queryWrapper.select("DISTINCT school_id");
+        List<String> list = (List<String>)(List) userService.listObjs(queryWrapper);
+
+        List<Map<String,Object>> tableData=new ArrayList<>();
+
+        List<SchoolInfo> schoolInfos = schoolInfoService.listByIds(list);
+
+        for (SchoolInfo s:schoolInfos
+             ) {
+            Map<String,Object> map=new HashMap<>();
+            map.put("schoolName",s.getName());
+            int t=0;
+            for (User u:list1
+                 ) {
+                if (s.getId().equals(u.getSchoolId())){
+                    t++;
+                }
+            }
+            map.put("registerNum",t);
+            t=0;
+            for (User u:list2
+            ) {
+                if (s.getId().equals(u.getSchoolId())){
+                    t++;
+                }
+            }
+            map.put("realyNameNum",t);
+            tableData.add(map);
+        }
+
+
+
+        Map<String,Object> map=new HashMap<>();
+        map.put("registerNum",list1.size());
+        map.put("realyNameNum",list2.size());
+        map.put("qNum",qNum);
+        map.put("qAvgNum",(double)qmNUm/(double)qNum);
+        map.put("tableData",tableData);
+        return map;
+    }
 
 }

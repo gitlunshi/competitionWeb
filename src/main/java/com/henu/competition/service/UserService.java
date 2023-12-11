@@ -29,7 +29,7 @@ import com.henu.competition.mapper.UserMapper;
  */
 @Slf4j
 @Service
-@Transactional(readOnly = true)
+@Transactional(readOnly = false)
 public class UserService extends ServiceImpl<UserMapper, User> {
     /**
      * 分页查询列表

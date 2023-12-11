@@ -17,6 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.validation.constraints.NotBlank;
 import java.io.IOException;
+import java.util.Map;
 
 /**
  * userController
@@ -81,4 +82,13 @@ public class CommonController extends BaseController {
     public void download(@PathVariable @NotBlank String file, HttpServletRequest request, HttpServletResponse response) throws IOException {
         commonService.downloadCompettionDoc(file,request,response);
     }
+
+    @ApiOperation(value = "大屏展示")
+    @GetMapping("/bigScreenPlay")
+    public Result<Map> bigScreenPlay(){
+        Result<Map> r=Result.ok();
+        Map map = commonService.bigScreenPlay();
+        return r.setData(map);
+    }
+
 }

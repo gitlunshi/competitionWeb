@@ -16,6 +16,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
@@ -39,7 +40,6 @@ import java.util.UUID;
 @Api(tags = "user")
 @RestController
 @Validated
-
 @RequestMapping("/user")
 public class UserController extends BaseController {
     @Autowired
@@ -140,10 +140,15 @@ public class UserController extends BaseController {
         BeanUtils.copyProperties(user,r);
         BeanUtils.copyProperties(modifyUserReq,r);
         r.setSchoolId(one.getId());
-        Boolean b = userService.updateById(user);
-        if (b){
-            session.setAttribute("user",r);
-            return Result.ok();
+        Boolean b1 = userService.deleteUserById(r.getId());
+        if (b1){
+            boolean save = userService.save(user);
+            if (save){
+                session.setAttribute("user",r);
+                return Result.ok();
+            }else{
+                throw new RuntimeException("系统错误");
+            }
         }
         return Result.failed();
     }

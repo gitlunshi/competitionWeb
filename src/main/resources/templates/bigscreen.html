@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>统计</title>
+    <link rel="stylesheet" href="/static/assets/iconfont/iconfont.css">
+    <link rel="stylesheet" href="/static/css/element-ui.css"/>
+    <link rel="stylesheet" href="/static/css/bigscreen.css"/>
+    <script src="/static/js/jquery-3.7.1.min.js"></script>
+    <script src="/static/js/vue.js"></script>
+    <script src="/static/js/element-ui.js"></script>
+    <link rel="icon" href="/static/img/favicon.ico" type="image/x-icon" />
+</head>
+<body>
+<div class='container' id='container' style="display: none">
+    <span>注册人数：{{registerNum}}</span><br>
+    <span>实名人数：{{realyNameNum}}</span><br>
+    <span>战队数量：{{qNum}}</span><br>
+    <span>战队平均人数：{{qAvgNum}}</span><br>
+    <span>学校信息：</span><br>
+    <div>
+        <el-table
+                :data="tableData"
+                style="width: 100%">
+            <el-table-column
+                    prop="schoolName"
+                    label="学校名称"
+                    width="300">
+            </el-table-column>
+            <el-table-column
+                    prop="registerNum"
+                    label="注册数量"
+                    width="180">
+            </el-table-column>
+            <el-table-column
+                    prop="realyNameNum"
+                    label="实名数量">
+            </el-table-column>
+        </el-table>
+    </div>
+</div>
+</body>
+
+<script>
+    var app;
+    let data={};
+    $.ajax({
+        type: 'GET', // 规定请求的类型（GET 或 POST）
+        url: '/common/bigScreenPlay', // 请求的url地址
+        dataType: 'json', //预期的服务器响应的数据类型
+        async:false,
+        beforeSend: function () { //发送请求前运行的函数（发送之前就会进入这个函数）
+
+        },
+        success: function (result) { // 当请求成功时运行的函数
+            if (result.code!=200){
+                alert(result.msg);
+            }else{
+                data=result.data;
+            }
+        },
+        error: function (result) { //失败的函数
+
+        },
+        complete: function () { //请求完成时运行的函数（在请求成功或失败之后均调用，即在 success 和 error 函数之后，不管成功还是失败 都会进这个函数）
+        }
+    });
+    $(document).ready(function () {
+        app = new Vue({
+            el: '#container',
+            data: {
+                registerNum:data.registerNum,
+                realyNameNum:data.realyNameNum,
+                qNum:data.qNum,
+                qAvgNum:data.qAvgNum,
+                tableData:data.tableData
+            },
+            methods: {
+                changeCodeImg(){
+                    $("#reCode-img").attr("src","/common/captcha?time="+new Date());
+                },
+            }
+        });
+        $("#container").css("display","block");
+    });
+</script>
+</html>

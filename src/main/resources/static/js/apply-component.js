@@ -402,7 +402,7 @@ tabTyp.userInfo = {
             return isJPG && isLt2M;
         },
         modifyUserInfo() {
-            if (!this.statentId || !this.realName || !this.sexSelect || !this.nation || !this.phone || !this.email || !this.schoolSelect || !this.imageUrl) {
+            if (!this.statentId || !this.realName || !this.sexSelect || !this.nation || !this.phone || !this.email || !this.schoolSelect || !this.imageUrl|| !this.educationSelect) {
                 app.$message.error("请将必填项填写完整！！");
                 return;
             }
@@ -413,6 +413,7 @@ tabTyp.userInfo = {
                 "nation": this.nation,
                 "phone": this.phone,
                 "email": this.email,
+                "education": this.educationSelect,
                 "schoolId": this.schoolSelect,
                 "address": this.address,
                 "sicImage": this.imageUrl,
