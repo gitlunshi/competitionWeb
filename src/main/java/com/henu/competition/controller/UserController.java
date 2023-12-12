@@ -124,7 +124,7 @@ public class UserController extends BaseController {
     @ApiOperation(value = "用户信息修改", notes = "")
     @PostMapping("/modifyUserInfo")
     @LoginValidator
-    public Result userLoginOut(@Valid @RequestBody ModifyUserReq modifyUserReq, HttpServletRequest request) {
+    public Result modifyUserInfo(@Valid @RequestBody ModifyUserReq modifyUserReq, HttpServletRequest request) {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("user");
 
